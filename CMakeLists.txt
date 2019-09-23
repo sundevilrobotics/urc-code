@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(tutorials)
+project(### !!! type package name here !!! ###)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -134,15 +134,6 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/tutorials_node.cpp)
-
-add_executable(test_node src/test_node.cpp)
-target_link_libraries(test_node ${catkin_LIBRARIES})
-
-add_executable(radio_transmitter src/radio_transmitter.cpp)
-target_link_libraries(radio_transmitter ${catkin_LIBRARIES})
-
-add_executable(smartphone src/smartphone.cpp)
-target_link_libraries(smartphone ${catkin_LIBRARIES})
 
 add_executable(basic_publisher src/basic_publisher.cpp)
 target_link_libraries(basic_publisher ${catkin_LIBRARIES})
