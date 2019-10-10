@@ -2,6 +2,11 @@
 int64 item #Roboteq information item code.
 int64 index #Motor index for multi-motor setups.  Set to -1 to ignore.
 int64 value #Value to write for 'set' methods.  Ignored for 'get' methods.
+uint8 commandtype #Type of command:
+# '^' for Config Set
+# '!' for Command Set
+# '~' for Config Get
+# '?' for Value Get
 
 ---
 
