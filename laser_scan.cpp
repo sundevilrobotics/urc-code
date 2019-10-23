@@ -3,14 +3,14 @@
 
 
 void scan_callback(sensor_msgs::LaserScan &msg){
-	std::cout << "Reading at 1 degree: ";
+	std::cout << "Left distance reading: ";
 	std::cout << msg.ranges[0] << "\n";
 
-	std::cout << "Reading at 160 degrees: ";
-	std::cout << msg.ranges[362];
+	std::cout << "Straight ahead distance reading: ";
+	std::cout << msg.ranges[msg.ranges.size()/2];
 
-	std::cout << "Reading at 320 degrees: ";
-	std::cout << msg.ranges[725];
+	std::cout << "Right distance reading: ";
+	std::cout << msg.ranges[msg.ranges.size()-1];
 }
 
 int main(int argc, char **argv){
