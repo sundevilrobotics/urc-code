@@ -10,9 +10,15 @@ bool sendCommand(drive_base::RoboteqCommand::Request &request, drive_base::Robot
     int result = 0;
     switch(request.commandtype)
     {
-        case '^':
+        case '~':
             response.response = device.GetConfig(request.item, request.index, result);
-            
+        case '!':
+            response.response = device.SetCommand(request.item, request.index, request.value);
+        case '?':
+            response.response = device.GetValue(request.item, request.index, result);
+        case '^':
+            response.response = device.SetConfig(request.item, request.index, request.value);
+        
     }
     response.result = result;
     return true;
