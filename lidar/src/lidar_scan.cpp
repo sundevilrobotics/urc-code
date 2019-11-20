@@ -1,8 +1,10 @@
 #include <ros/ros.h>
 #include "sensor_msgs/LaserScan.h"
+//#include "sensor_msgs/   "
 
 float distance_at_index(sensor_msgs::LaserScan &msg, int x){
 	return msg.ranges[x];
+	//return msg.data[x];
 }
 
 void callback_scan(sensor_msgs::LaserScan msg){
@@ -16,7 +18,7 @@ int main (int argc, char **argv)
 	ros::init(argc, argv, "lidar_scan");		
 	ros::NodeHandle nh;
 
-	ros::Subscriber sub = nh.subscribe("/scan", 10, callback_scan);	
+	ros::Subscriber sub = nh.subscribe("/scan", 10, callback_scan);		// change topic
 
 	ros::spin();		
 }
