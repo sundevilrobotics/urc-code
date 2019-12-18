@@ -148,8 +148,8 @@ include_directories(
 add_executable(img_publisher src/img_publisher.cpp)
 target_link_libraries(img_publisher ${catkin_LIBRARIES} ${OpenCV_LIBS})
 
-#add_executable(img_subscriber src/img_subscriber.cpp)
-#target_link_libraries(img_subscriber ${catkin_LIBRARIES} ${OpenCV_LIBS})
+add_executable(img_subscriber src/img_subscriber.cpp)
+target_link_libraries(img_subscriber ${catkin_LIBRARIES} ${OpenCV_LIBS})
 
 
 ## Rename C++ executable without prefix

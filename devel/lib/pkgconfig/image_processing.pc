@@ -1,0 +1,8 @@
+prefix=/home/brandon/catkin_ws/src/urc-code/devel
+
+Name: image_processing
+Description: Description of image_processing
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/brandon/catkin_ws/src/urc-code/devel/lib 
+Requires: roscpp std_msgs cv_bridge image_transport
