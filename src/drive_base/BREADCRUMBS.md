@@ -10,5 +10,17 @@ This file is intended to serve as a casual usage/extension/maintenance guide for
 - Remove this file.  It doesn't belong inside a ROS package.  Copy it to wherever you need to.
 
 ## Codemap
+`include/Configuration.h` : Robot Tuning Constants
+`include/Constants.h` : Universal Robot Contents
+`include/ErrorCodes.h` : Roboteq Error Codes
+`include/Macros.h` : Useful macros
+`include/RoboteqDevice.h` : Roboteq C++ driver
+`srv/RoboteqCommand.srv` : Roboteq Command Server 
+`src/RoboteqDevice.cpp` : Roboteq C++ driver
+`src/roboteq_command_server.cpp` : ROS Roboteq Server
+`src/roboteq_diff_drive.cpp` : ROS node to interact between cmd_vel and Roboteq Motor Controllers
 
+## Usage
+`roboteq_command_server` takes calls in the standard roboteq command format.
+`roboteq_diff_drive` subscribes to /cmd_vel and runs the motor drivers.
 
