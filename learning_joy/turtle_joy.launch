@@ -16,5 +16,5 @@
   <param name="axis_angular" value="2" type="int"/>
   <param name="scale_linear" value="2" type="double"/>
   <param name="scale_angular" value="2" type="double"/>
-  <node pkg="learning_joy" type="turtle_teleop_joy" name="teleop" output="screen"/>
+  <node pkg="learning_joy" type="joystick_handler" name="teleop" output="screen"/>
 </launch>
