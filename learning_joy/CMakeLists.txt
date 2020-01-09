@@ -135,8 +135,8 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/learning_joy_node.cpp)
 
-add_executable(turtle_teleop_joy src/turtle_teleop_joy.cpp)
-target_link_libraries(turtle_teleop_joy ${catkin_LIBRARIES})
+add_executable(joystick_handler src/joystick_handler.cpp)
+target_link_libraries(joystick_handler ${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

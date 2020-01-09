@@ -6,10 +6,19 @@
 #include "Configuration.h"
 #include <math.h>
 
-class TeleopTurtle
+// To use: run:
+// roslaunch turtle_joy.launch
+
+// Or alternatively:
+// rosrun joy joynode with rosrun
+// and
+// rosrun learning_joy turtle_teleop_joy
+
+
+class JoystickHandler
 {
 public:
-  TeleopTurtle();
+  JoystickHandler();
 
 private:
   void joyCallback(const sensor_msgs::Joy::ConstPtr& joy);
@@ -24,13 +33,10 @@ private:
 };
 
 
-TeleopTurtle::TeleopTurtle():
+JoystickHandler::JoystickHandler():
   linear_(1),
   angular_(2)
 {
-
-  ROS_INFO("Built TeleopTurtle");
-
   nh_.param("axis_linear", linear_, linear_);
   nh_.param("axis_angular", angular_, angular_);
   nh_.param("scale_angular", a_scale_, a_scale_);
@@ -40,19 +46,15 @@ TeleopTurtle::TeleopTurtle():
   vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
 
 
-  joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 10, &TeleopTurtle::joyCallback, this);
-
-  ROS_INFO("Published To /cmd_vel");
-
+  joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 10, &JoystickHandler::joyCallback, this);
 }
 
-void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
+void JoystickHandler::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 {
   geometry_msgs::Twist twist;
   twist.angular.z = joy->axes[angular_];
   twist.linear.x = joy->axes[linear_];
   vel_pub_.publish(twist);
-  ROS_INFO("Joy Callback\n");
 }
 
 void callback(const geometry_msgs::Twist::ConstPtr& msg){
@@ -70,10 +72,10 @@ void callback(const geometry_msgs::Twist::ConstPtr& msg){
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "teleop_turtle");
+  ros::init(argc, argv, "joy_handler");
   ROS_INFO("Start\n");
 
-  TeleopTurtle teleop_turtle;
+  JoystickHandler joy_handler;
 
   ros::NodeHandle handle;
   ros::Subscriber subscriber = handle.subscribe("/cmd_vel", 1000, callback);
