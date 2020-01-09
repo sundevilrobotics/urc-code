@@ -1,10 +1,8 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
-
-// #include "learning_joy/RoboteqCommand.h"
 #include "Configuration.h"
-#include <math.h>
+// #include "learning_joy/RoboteqCommand.h"
 
 // To use: run:
 // roslaunch turtle_joy.launch
@@ -32,7 +30,7 @@ private:
 
 };
 
-
+// Set-up subscribers/publishers in constructor
 JoystickHandler::JoystickHandler():
   linear_(1),
   angular_(2)
@@ -42,18 +40,18 @@ JoystickHandler::JoystickHandler():
   nh_.param("scale_angular", a_scale_, a_scale_);
   nh_.param("scale_linear", l_scale_, l_scale_);
 
-
-  vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
-
-
+  // Get joystick info from /joy
   joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 10, &JoystickHandler::joyCallback, this);
+
+  // Set joystick values in /cmd_vel
+  vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
 }
 
 void JoystickHandler::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 {
   geometry_msgs::Twist twist;
-  twist.angular.z = joy->axes[angular_];
-  twist.linear.x = joy->axes[linear_];
+  twist.angular.z = joy->axes[angular_]; // Set rotation axis data
+  twist.linear.x = joy->axes[linear_]; // Set forward/backward axis data
   vel_pub_.publish(twist);
 }
 
@@ -66,19 +64,18 @@ void callback(const geometry_msgs::Twist::ConstPtr& msg){
     rightVelocity = linear + TRACK_WIDTH * angular/2;
 
     ROS_INFO("%f, %f", leftVelocity, rightVelocity);
-
 }
 
 
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "joy_handler");
-  ROS_INFO("Start\n");
 
   JoystickHandler joy_handler;
 
-  ros::NodeHandle handle;
-  ros::Subscriber subscriber = handle.subscribe("/cmd_vel", 1000, callback);
+  // Handler for setting calcualted velocity values
+  ros::NodeHandle vel_handle;
+  ros::Subscriber vel_sub = vel_handle.subscribe("/cmd_vel", 1000, callback);
 
   ros::spin();
 }
