@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   learning_joy
   roboteq_driver
   roboteq_msgs
+  serial
 )
 
 ## System dependencies are found with CMake's conventions

@@ -7,6 +7,14 @@
 #include <stdio.h>
 #include <sensor_msgs/Joy.h>
 #include "roboteq_msgs/Command.h"
+#include <std_msgs/String.h>
+#include <stdio.h>
+
+#include <string>
+#include <iostream>
+#include <cstdio>
+#include <unistd.h>
+#include "serial/serial.h"
 
 class Chassis
 {
@@ -59,50 +67,34 @@ public:
     ros::NodeHandle joy_handle;
     ros::Subscriber sub = joy_handle.subscribe("/j0", 1000, chatterCallback);
 
+    serial::Serial my_serial_l("/dev/ttyACM0", 115200, serial::Timeout::simpleTimeout(10));
+    serial::Serial my_serial_r("/dev/ttyACM1", 115200, serial::Timeout::simpleTimeout(10));
 
+    std::cout << "Is the serial port open?";
+    if(my_serial_l.isOpen())
+      std::cout << " Yes." << std::endl;
+    else
+      std::cout << " No." << std::endl;
 
-    ros::NodeHandle n;
-    ros::Publisher chatter_pub_l = n.advertise<roboteq_msgs::Command>("/roboteq_driver/cmd", 1000);
-    ros::Publisher chatter_pub_r = n.advertise<std_msgs::String>("drive_right_control", 1000);
-  ros::Rate loop_rate(1000);
-  int count = 0;
-while (ros::ok())
-{
-  /**
-   * This is a message object. You stuff it with data, and then publish it.
-   */
-   roboteq_msgs::Command msg_l;
-   std_msgs::String msg_r;
+    std::string data;
+    ros::Rate loop_rate(1000);
 
-   std::stringstream ss_l;
-   std::stringstream ss_r;
-  ss_l << "!G 1 " << joyDataLeft * 200 << "_" << std::endl;
-  // ss << "!g 2 " << joyData * 200 << "_" << std::endl;
+    while(ros::ok())
+    {
+      std::string result = my_serial_l.read(500);
+       result += my_serial_r.read(500);
 
-  ss_r << "!G 1 " << joyDataLeft * 200 << "" << std::endl;
-  ss_r << "!G 2 " << joyDataLeft * 200 << "" << std::endl;
+std::cout << "Bytes read: ";
+std::cout << result.length() << ", String read: " << result << std::endl;
 
-  msg_l.mode = 0;
-  msg_l.setpoint = joyDataLeft * 1000;
-
-  msg_r.data = ss_r.str();
-
-
-  /**
-   * The publish() function is how you send messages. The parameter
-   * is the message object. The type of this object must agree with the type
-   * given as a template parameter to the advertise<>() call, as was done
-   * in the constructor above.
-   */
-   chatter_pub_l.publish(msg_l);
-   chatter_pub_r.publish(msg_r);
-
-  ros::spinOnce();
-
-  loop_rate.sleep();
-  ++count;
-}
-
+data = "!G 1 " + std::to_string(joyDataLeft * 1000) + "\r\n!G 2 " + std::to_string(joyDataLeft * 1000) + "\r\n";// + std::to_string(joyDataLeft) + "\r\n";
+  size_t bytes_wrote = my_serial_l.write(data);
+data = "!G 1 " + std::to_string(joyDataRight * 1000) + "\r\n!G 2 " + std::to_string(joyDataRight * 1000) + "\r\n";// + std::to_string(joyDataLeft) + "\r\n";
+  bytes_wrote += my_serial_r.write(data);
+        std::cout << "BYTES: " << bytes_wrote << " ; command: " << data << std::endl;
+        ros::spinOnce();
+        loop_rate.sleep();
+    }
   }
 };
 

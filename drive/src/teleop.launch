@@ -1,5 +1,5 @@
 <launch>
-  <!<node pkg="rosserial_server" type="serial_node" name="serial_drive_left">
+  <!-- <!<node pkg="rosserial_server" type="serial_node" name="serial_drive_left">
     <rosparam>
       port: /dev/ttyACM0
       baud: 115200
@@ -7,7 +7,7 @@
         publishers: [ status_l ]
         subscribers: [ drive_left_control ]
     </rosparam>
-  </node>
+  </node> -->
 
   <!-- <node pkg="rosserial_server" type="serial_node" name="serial_drive_right">
     <rosparam>
