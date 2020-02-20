@@ -10,6 +10,8 @@ project(drive)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   learning_joy
+  roboteq_driver
+  roboteq_msgs
 )
 
 ## System dependencies are found with CMake's conventions

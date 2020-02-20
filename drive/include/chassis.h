@@ -6,6 +6,7 @@
 #include <std_msgs/String.h>
 #include <stdio.h>
 #include <sensor_msgs/Joy.h>
+#include "roboteq_msgs/Command.h"
 
 class Chassis
 {
@@ -61,7 +62,7 @@ public:
 
 
     ros::NodeHandle n;
-    ros::Publisher chatter_pub_l = n.advertise<std_msgs::String>("drive_left_control", 1000);
+    ros::Publisher chatter_pub_l = n.advertise<roboteq_msgs::Command>("/roboteq_driver/cmd", 1000);
     ros::Publisher chatter_pub_r = n.advertise<std_msgs::String>("drive_right_control", 1000);
   ros::Rate loop_rate(1000);
   int count = 0;
@@ -70,17 +71,19 @@ while (ros::ok())
   /**
    * This is a message object. You stuff it with data, and then publish it.
    */
-   std_msgs::String msg_l;
+   roboteq_msgs::Command msg_l;
    std_msgs::String msg_r;
 
    std::stringstream ss_l;
    std::stringstream ss_r;
-  ss_l << "!g 1 " << joyDataLeft * 200 << "_" << std::endl;
+  ss_l << "!G 1 " << joyDataLeft * 200 << "_" << std::endl;
   // ss << "!g 2 " << joyData * 200 << "_" << std::endl;
 
-  ss_r << "!g 1 " << joyDataRight * 200 << "_" << std::endl;
+  ss_r << "!G 1 " << joyDataLeft * 200 << "" << std::endl;
+  ss_r << "!G 2 " << joyDataLeft * 200 << "" << std::endl;
 
-  msg_l.data = ss_l.str();
+  msg_l.mode = 0;
+  msg_l.setpoint = joyDataLeft * 1000;
 
   msg_r.data = ss_r.str();
 
