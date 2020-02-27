@@ -142,8 +142,8 @@ include_directories(
 # add_executable(${PROJECT_NAME}_node src/image_processing_node.cpp)
 
 
-#add_executable(roscpp_opencv_example src/roscpp_opencv.cpp)
-#target_link_libraries(roscpp_opencv_example ${catkin_LIBRARIES} ${OpenCV_LIBS})
+add_executable(roscpp_opencv_example src/roscpp_opencv.cpp)
+target_link_libraries(roscpp_opencv_example ${catkin_LIBRARIES} ${OpenCV_LIBS})
 
 add_executable(img_publisher src/img_publisher.cpp)
 target_link_libraries(img_publisher ${catkin_LIBRARIES} ${OpenCV_LIBS})

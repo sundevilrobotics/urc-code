@@ -409,6 +409,7 @@ clean: gtest/googlemock/gtest/CMakeFiles/gtest.dir/clean
 
 # Convenience name for "all" pass in the directory.
 image_processing/all: image_processing/CMakeFiles/img_publisher.dir/all
+image_processing/all: image_processing/CMakeFiles/roscpp_opencv_example.dir/all
 image_processing/all: image_processing/CMakeFiles/img_subscriber.dir/all
 
 .PHONY : image_processing/all
@@ -433,6 +434,7 @@ image_processing/clean: image_processing/CMakeFiles/std_msgs_generate_messages_l
 image_processing/clean: image_processing/CMakeFiles/roscpp_generate_messages_cpp.dir/clean
 image_processing/clean: image_processing/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
 image_processing/clean: image_processing/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/clean
+image_processing/clean: image_processing/CMakeFiles/roscpp_opencv_example.dir/clean
 image_processing/clean: image_processing/CMakeFiles/std_msgs_generate_messages_cpp.dir/clean
 image_processing/clean: image_processing/CMakeFiles/img_subscriber.dir/clean
 image_processing/clean: image_processing/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/clean
@@ -1059,6 +1061,43 @@ image_processing/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/clean:
 
 # clean rule for target.
 clean: image_processing/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target image_processing/CMakeFiles/roscpp_opencv_example.dir
+
+# All Build rule for target.
+image_processing/CMakeFiles/roscpp_opencv_example.dir/all:
+	$(MAKE) -f image_processing/CMakeFiles/roscpp_opencv_example.dir/build.make image_processing/CMakeFiles/roscpp_opencv_example.dir/depend
+	$(MAKE) -f image_processing/CMakeFiles/roscpp_opencv_example.dir/build.make image_processing/CMakeFiles/roscpp_opencv_example.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brandon/catkin_ws/src/urc-code/build/CMakeFiles --progress-num=16,17 "Built target roscpp_opencv_example"
+.PHONY : image_processing/CMakeFiles/roscpp_opencv_example.dir/all
+
+# Include target in all.
+all: image_processing/CMakeFiles/roscpp_opencv_example.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+image_processing/CMakeFiles/roscpp_opencv_example.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brandon/catkin_ws/src/urc-code/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 image_processing/CMakeFiles/roscpp_opencv_example.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brandon/catkin_ws/src/urc-code/build/CMakeFiles 0
+.PHONY : image_processing/CMakeFiles/roscpp_opencv_example.dir/rule
+
+# Convenience name for target.
+roscpp_opencv_example: image_processing/CMakeFiles/roscpp_opencv_example.dir/rule
+
+.PHONY : roscpp_opencv_example
+
+# clean rule for target.
+image_processing/CMakeFiles/roscpp_opencv_example.dir/clean:
+	$(MAKE) -f image_processing/CMakeFiles/roscpp_opencv_example.dir/build.make image_processing/CMakeFiles/roscpp_opencv_example.dir/clean
+.PHONY : image_processing/CMakeFiles/roscpp_opencv_example.dir/clean
+
+# clean rule for target.
+clean: image_processing/CMakeFiles/roscpp_opencv_example.dir/clean
 
 .PHONY : clean
 

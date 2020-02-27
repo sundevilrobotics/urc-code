@@ -61,6 +61,7 @@
 /home/brandon/catkin_ws/src/urc-code/build/image_processing/CMakeFiles/install.dir
 /home/brandon/catkin_ws/src/urc-code/build/image_processing/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir
 /home/brandon/catkin_ws/src/urc-code/build/image_processing/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir
+/home/brandon/catkin_ws/src/urc-code/build/image_processing/CMakeFiles/roscpp_opencv_example.dir
 /home/brandon/catkin_ws/src/urc-code/build/image_processing/CMakeFiles/std_msgs_generate_messages_cpp.dir
 /home/brandon/catkin_ws/src/urc-code/build/image_processing/CMakeFiles/img_subscriber.dir
 /home/brandon/catkin_ws/src/urc-code/build/image_processing/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir

@@ -453,6 +453,21 @@ rosgraph_msgs_generate_messages_lisp/fast:
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
+image_processing/CMakeFiles/roscpp_opencv_example.dir/rule:
+	cd /home/brandon/catkin_ws/src/urc-code/build && $(MAKE) -f CMakeFiles/Makefile2 image_processing/CMakeFiles/roscpp_opencv_example.dir/rule
+.PHONY : image_processing/CMakeFiles/roscpp_opencv_example.dir/rule
+
+# Convenience name for target.
+roscpp_opencv_example: image_processing/CMakeFiles/roscpp_opencv_example.dir/rule
+
+.PHONY : roscpp_opencv_example
+
+# fast build rule for target.
+roscpp_opencv_example/fast:
+	cd /home/brandon/catkin_ws/src/urc-code/build && $(MAKE) -f image_processing/CMakeFiles/roscpp_opencv_example.dir/build.make image_processing/CMakeFiles/roscpp_opencv_example.dir/build
+.PHONY : roscpp_opencv_example/fast
+
+# Convenience name for target.
 image_processing/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
 	cd /home/brandon/catkin_ws/src/urc-code/build && $(MAKE) -f CMakeFiles/Makefile2 image_processing/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 .PHONY : image_processing/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
@@ -626,6 +641,33 @@ src/img_subscriber.cpp.s:
 	cd /home/brandon/catkin_ws/src/urc-code/build && $(MAKE) -f image_processing/CMakeFiles/img_subscriber.dir/build.make image_processing/CMakeFiles/img_subscriber.dir/src/img_subscriber.cpp.s
 .PHONY : src/img_subscriber.cpp.s
 
+src/roscpp_opencv.o: src/roscpp_opencv.cpp.o
+
+.PHONY : src/roscpp_opencv.o
+
+# target to build an object file
+src/roscpp_opencv.cpp.o:
+	cd /home/brandon/catkin_ws/src/urc-code/build && $(MAKE) -f image_processing/CMakeFiles/roscpp_opencv_example.dir/build.make image_processing/CMakeFiles/roscpp_opencv_example.dir/src/roscpp_opencv.cpp.o
+.PHONY : src/roscpp_opencv.cpp.o
+
+src/roscpp_opencv.i: src/roscpp_opencv.cpp.i
+
+.PHONY : src/roscpp_opencv.i
+
+# target to preprocess a source file
+src/roscpp_opencv.cpp.i:
+	cd /home/brandon/catkin_ws/src/urc-code/build && $(MAKE) -f image_processing/CMakeFiles/roscpp_opencv_example.dir/build.make image_processing/CMakeFiles/roscpp_opencv_example.dir/src/roscpp_opencv.cpp.i
+.PHONY : src/roscpp_opencv.cpp.i
+
+src/roscpp_opencv.s: src/roscpp_opencv.cpp.s
+
+.PHONY : src/roscpp_opencv.s
+
+# target to generate assembly for a file
+src/roscpp_opencv.cpp.s:
+	cd /home/brandon/catkin_ws/src/urc-code/build && $(MAKE) -f image_processing/CMakeFiles/roscpp_opencv_example.dir/build.make image_processing/CMakeFiles/roscpp_opencv_example.dir/src/roscpp_opencv.cpp.s
+.PHONY : src/roscpp_opencv.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -658,6 +700,7 @@ help:
 	@echo "... install"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
+	@echo "... roscpp_opencv_example"
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... img_subscriber"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
@@ -672,6 +715,9 @@ help:
 	@echo "... src/img_subscriber.o"
 	@echo "... src/img_subscriber.i"
 	@echo "... src/img_subscriber.s"
+	@echo "... src/roscpp_opencv.o"
+	@echo "... src/roscpp_opencv.i"
+	@echo "... src/roscpp_opencv.s"
 .PHONY : help
 
 

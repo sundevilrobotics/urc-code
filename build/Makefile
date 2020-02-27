@@ -532,6 +532,19 @@ rosgraph_msgs_generate_messages_lisp/fast:
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 #=============================================================================
+# Target rules for targets named roscpp_opencv_example
+
+# Build rule for target.
+roscpp_opencv_example: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roscpp_opencv_example
+.PHONY : roscpp_opencv_example
+
+# fast build rule for target.
+roscpp_opencv_example/fast:
+	$(MAKE) -f image_processing/CMakeFiles/roscpp_opencv_example.dir/build.make image_processing/CMakeFiles/roscpp_opencv_example.dir/build
+.PHONY : roscpp_opencv_example/fast
+
+#=============================================================================
 # Target rules for targets named std_msgs_generate_messages_cpp
 
 # Build rule for target.
@@ -676,6 +689,7 @@ help:
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
+	@echo "... roscpp_opencv_example"
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... img_subscriber"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"

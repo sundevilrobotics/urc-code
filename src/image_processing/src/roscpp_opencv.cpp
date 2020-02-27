@@ -1,71 +1,100 @@
+#include <ros/ros.h>
+#include <image_transport/image_transport.h>
+#include <opencv2/highgui/highgui.hpp>
+#include <cv_bridge/cv_bridge.h>
+
 /*
- * OpenCV Example using ROS and CPP
+ * File: img_publisher.cpp
+ * Author: Brandon Rice
+ * Desc: Testing for detecting the Alvar AR tags probably used in this year's
+ *       URC comp. See (http://wiki.ros.org/ar_track_alvar) for more info.
  */
 
-// Include the ROS library
-#include <ros/ros.h>
 
-// Include opencv2
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/highgui/highgui.hpp>
+using namespace std;
+using namespace cv;
 
-// Include CvBridge, Image Transport, Image msg
-#include <image_transport/image_transport.h>
-#include <cv_bridge/cv_bridge.h>
-#include <sensor_msgs/image_encodings.h>
-
-// OpenCV Window Name
-static const std::string OPENCV_WINDOW = "Image window";
-
-// Topics
-static const std::string IMAGE_TOPIC = "/camera/rgb/image_raw";
-static const std::string PUBLISH_TOPIC = "/image_converter/output_video";
-
-// Publisher
-ros::Publisher pub;
-
-void image_cb(const sensor_msgs::ImageConstPtr& msg)
-{
-  std_msgs::Header msg_header = msg->header;
-  std::string frame_id = msg_header.frame_id.c_str();
-  ROS_INFO_STREAM("New Image from " << frame_id);
-
-  cv_bridge::CvImagePtr cv_ptr;
-  try
-  {
-    cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
-  }
-  catch (cv_bridge::Exception& e)
-  {
-    ROS_ERROR("cv_bridge exception: %s", e.what());
-    return;
-  }
-
-  // Draw an example crosshair
-  cv::drawMarker(cv_ptr->image, cv::Point(cv_ptr->image.cols/2, cv_ptr->image.rows/2),  cv::Scalar(0, 0, 255), cv::MARKER_CROSS, 10, 1);
-
-  // Update GUI Window
-  cv::imshow(OPENCV_WINDOW, cv_ptr->image);
-  cv::waitKey(3);
-
-  // Output modified video stream
-  pub.publish(cv_ptr->toImageMsg());
-}
-
-// Main function
 int main(int argc, char** argv)
 {
-  // Initialize the ROS Node "roscpp_example"
-  ros::init(argc, argv, "roscpp_example");
 
-  // Instantiate the ROS Node Handler as nh
+  ros::init(argc, argv, "img_publisher");		// the node name does not have to be the same as the file name
+
   ros::NodeHandle nh;
+  image_transport::ImageTransport it(nh);
+  image_transport::Publisher pub = it.advertise("camera/image", 1);
 
-  // Print "Hello ROS!" to the terminal and ROS log file
-  ROS_INFO_STREAM("Hello from ROS node " << ros::this_node::getName());
+  Mat frame, resized;
+  VideoCapture cap;
+  // open the default camera using default API
+  // cap.open(0);
+  // OR advance usage: select any API backend
+  int deviceID = 1;             // 0 = open default camera
+  int apiID = cv::CAP_ANY;      // 0 = autodetect default API
+  // open selected camera using selected API
 
-  image_cb();
 
-  // Program succesful
+  for(int i = deviceID; i < 10; i++)
+  {
+    cap.open(i + apiID);
+    if(cap.isOpened()) break;
+  }
+  // check if we succeeded
+  if (!cap.isOpened()) {
+  cerr << "ERROR! Unable to open camera\n";
+  return -1;
+  }
+  //--- GRAB AND WRITE LOOP
+  cout << "Start grabbing" << endl
+  << "Press any key to terminate" << endl;
+  // cap.set(CV_CAP_PROP_FRAME_WIDTH,1280);
+  // cap.set(CV_CAP_PROP_FRAME_HEIGHT,720);
+
+  // cv::Size S = cv::Size((int) cap.get(CV_CAP_PROP_FRAME_WIDTH), (int) cap.get(CV_CAP_PROP_FRAME_HEIGHT));
+  // int ex = static_cast<int>(cap.get(CV_CAP_PROP_FOURCC));
+  // int fps = cap.get(CV_CAP_PROP_FPS);
+  // cout << "fps " << fps << " ex " << ex << endl;
+  // VideoWriter video("/home/brandon/catkin_ws/src/urc-code/src/image_processing/img/out.avi", CV_FOURCC('M', 'J', 'P', 'G'), cap.get(CV_CAP_PROP_FPS), S, true);
+
+  while (1)
+  {
+
+
+    // wait for a new frame from camera and store it into 'frame'
+    cap.read(frame);
+    cv::resize(frame, resized, cv::Size(640, 360));
+
+    sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", frame).toImageMsg();
+
+    ros::Rate loop_rate(5000);
+    //while (nh.ok()) {
+      pub.publish(msg);
+      ros::spinOnce();
+      loop_rate.sleep();
+      cv::imshow("out", resized);
+      char key = (char) cv::waitKey(1);
+    //}
+
+
+    // cvtColor(frame, frame, CV_RGB2GRAY);
+    // Mat normalizedImg;
+    // //GaussianBlur( frame, frame, Size( 9, 9 ), 0, 0 );
+    // cv::normalize(frame,  normalizedImg, 0, 100, cv::NORM_MINMAX);
+    // cv::Mat image, imageCopy;
+    // normalizedImg.copyTo(imageCopy);
+    // std::vector<int> ids;
+    // std::vector<std::vector<cv::Point2f> > corners;
+    // cv::aruco::detectMarkers(frame, dictionary, corners, ids);
+    // // if at least one marker detected
+    // if (ids.size() > 0)
+    // cv::aruco::drawDetectedMarkers(imageCopy, corners, ids);
+    // cv::imshow("out", imageCopy);
+    // char key = (char) cv::waitKey(1);
+    if (key == 27)
+    {
+      cap.~VideoCapture();
+      break;
+    }
+  }
+  // the camera will be deinitialized automatically in VideoCapture destructor
   return 0;
 }
