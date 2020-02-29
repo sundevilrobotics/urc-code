@@ -32,8 +32,8 @@ public:
     joyDataLeft = joy->axes[1];  // Left Y Axis
     joyDataRight = joy->axes[4]; // Right Y Axis
 
-    joyDataLeft = 2.0/3.1415 * atan(2 * pow(joyDataLeft, 3) );
-    joyDataRight = 2.0/3.1415 * atan(2 * pow(joyDataRight, 3) );
+    joyDataLeft = 2.0/3.1415 * atan(1.8 * pow(joyDataLeft, 1.8) );
+    joyDataRight = 2.0/3.1415 * atan(1.8 * pow(joyDataRight, 1.8) );
 
 
   }
