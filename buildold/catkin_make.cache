@@ -1,0 +1,2 @@
+image_processing
+-DCATKIN_DEVEL_PREFIX=/home/brandon/catkin_ws/src/urc-code/devel -DCMAKE_INSTALL_PREFIX=/home/brandon/catkin_ws/src/urc-code/install -G Unix Makefiles

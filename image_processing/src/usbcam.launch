@@ -1,0 +1,15 @@
+<launch>
+    <node pkg="tf" type="static_transform_publisher" name="world_to_cam"
+    args="0 0 0.5 -1.57 0 -1.57 world usb_cam 10" />
+    <node pkg="usb_cam" type="usb_cam_node" name="usb_cam">
+    <param name="camera_frame_id" type="string" value="/usb_cam" />
+    <param name="video_device" type="string" value="/dev/video1"/>
+    <param name="image_width" type="int" value="1280" />
+    <param name="image_height" type="int" value="720" />
+    <param name="pixel_format" type="string" value="yuyv"/>
+<rosparam param="D">[0.21582, -0.68937, -0.00314, -0.00033, 0.0]</rosparam>
+<rosparam param="K">[1196.80797, 0.0, 608.49624, 0.0, 1187.99243, 379.59537, 0.0, 0.0, 1.0]</rosparam>
+<rosparam param="R">[1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]</rosparam>
+<rosparam param="P">[1201.46741, 0.0, 604.19097, 0.0, 0.0, 1206.73816, 377.82261, 0.0, 0.0, 0.0, 1.0, 0.0]</rosparam>
+    </node>
+</launch>
