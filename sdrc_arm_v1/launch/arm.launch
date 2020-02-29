@@ -1,0 +1,22 @@
+<launch>
+  <env name="ROSCONSOLE_FORMAT" value="[${severity}][${thread}][${node}/${function}:${line}]: ${message}"/>
+
+  <!-- Joystick Node -->
+  <arg name="joystick_serial_device" default="/dev/input/js0"/>
+  <node pkg="joy" type="joy_node" name="joy_node" clear_params="true" >
+    <param name="deadzone" value="0.25" />
+    <param name="coalesce_interval" value="0.1" />
+      <!-- INPUT DEVICE -->
+    <param name="dev" value="$(arg joystick_serial_device)" />
+      <!-- OUTPUT TOPICS -->
+    <remap from="joy" to="joy_arm" />
+  </node>
+
+  <!-- Simple Arm Node -->
+  <arg name="microcontroller_serial_device" default="/dev/ttyACM0"/>
+  <node pkg="sdrc_arm_v1" name="sdrc_arm_v1" type="sdrc_arm_v1" output="screen" >
+    <param name="serial_device" value="$(arg microcontroller_serial_device)" />
+    <param name="baudrate" type="int" value="9600"/>
+  </node>
+
+</launch>

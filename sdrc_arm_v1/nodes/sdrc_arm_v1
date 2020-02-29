@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+from sdrc_arm_v1 import arm_control
+
+if __name__ == '__main__':
+    arm_control.main()

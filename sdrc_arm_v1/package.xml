@@ -1,0 +1,21 @@
+<package>
+  <name>sdrc_arm_v1</name>
+  <version>0.1.0</version>
+  <description>
+      Simple velocity controlled arm. Teleoperation software and firmware.
+  </description>
+  <maintainer email="danielsnider12@gmail.com">Daniel Snider</maintainer>
+  <author email="danielsnider12@gmail.com">Daniel Snider</author>
+  <author email="matthewmirvish@hotmail.com">Matthew Mirvish</author>
+  <license>Unlicense</license>
+  <url type="website">http://wiki.ros.org/simple_arm</url>
+  <url type="repository">https://github.com/danielsnider/simple_arm</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>python-numpy</run_depend>
+
+</package>
