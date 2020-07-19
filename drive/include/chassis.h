@@ -8,6 +8,7 @@
 #include <sensor_msgs/Joy.h>
 #include "roboteq_msgs/Command.h"
 #include <std_msgs/String.h>
+#include <std_msgs/Float32.h>
 #include <stdio.h>
 
 #include <string>
@@ -36,7 +37,17 @@ public:
     joyDataRight = 2.0/3.1415 * atan(1.8 * pow(joyDataRight, 1.8) );
 
 
+    ros::NodeHandle nhl;
+    ros::NodeHandle nhr;
+
+    ros::Publisher publ = nhl.advertise<std_msgs::Float32>("/drive/velocity/left_velocity", 10);	// /channel_1 is the topic name, 10 is the queue size
+    ros::Publisher pubr = nhr.advertise<std_msgs::Float32>("/drive/velocity/right_velocity", 10);	// /channel_1 is the topic name, 10 is the queue size
+
+    publ.publish(joyDataLeft);
+    pubr.publish(joyDataRight);
+
   }
+
 
   static void update()
   {
