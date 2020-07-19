@@ -4,3 +4,4 @@ This is a package of modified code from tutorials to interface with joystick con
 
 # Dependencies:
 - joy (http://wiki.ros.org/joy)
+- libusb (sudo apt-get install libusb-dev)
