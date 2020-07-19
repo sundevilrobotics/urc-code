@@ -1,4 +1,8 @@
-ROS Package: drive
+# drive
+
+# Dependencies:
+- roboteq_driver (http://wiki.ros.org/roboteq_driver)
+
 Author: Brandon Rice
 
 Description: This package contains the code necessary to drive
