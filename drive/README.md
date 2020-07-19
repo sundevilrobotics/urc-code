@@ -3,6 +3,8 @@
 # Dependencies:
 - roboteq_driver (http://wiki.ros.org/roboteq_driver)
 - *Note: roboteq_driver requires serial (https://github.com/wjwwood/serial.git)*
+        *and aparantly python got renamed to python2.7 or python3 in Ubuntu 20.04,*
+        *so if you use 20.04, * `sudo apt-get install python-is-python3`
 
 Author: Brandon Rice
 
