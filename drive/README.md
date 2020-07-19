@@ -2,6 +2,7 @@
 
 # Dependencies:
 - roboteq_driver (http://wiki.ros.org/roboteq_driver)
+- *Note: roboteq_driver requires serial (https://github.com/wjwwood/serial.git)*
 
 Author: Brandon Rice
 
