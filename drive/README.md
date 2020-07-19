@@ -5,6 +5,22 @@
 - *Note: roboteq_driver requires serial (https://github.com/wjwwood/serial.git)*
         *and aparantly python got renamed to python2.7 or python3 in Ubuntu 20.04,*
         *so if you use 20.04, * `sudo apt-get install python-is-python3`
+        *Also: roboteq was using Python 2, so you must fix the file *
+        `./roboteq_driver/mbs/genc` to have the following Python 3 lines:
+        
+        
+ ```python
+ #!/usr/bin/env python
+
+from sys import argv
+
+print ("const char* ", argv[1], "[] = {")
+with open(argv[2]) as f:
+    for line in f.readlines():
+        print ('  "', line.strip(), '",')
+print ("  0")
+print ("};")
+```
 
 Author: Brandon Rice
 
