@@ -1,0 +1,39 @@
+############################################################
+# Remaps /dev/input/js0, etc., to static /dev/SYMLINK_Name
+# based on device attributes like vendor id, product id, or
+# joystick serial number.
+#
+#
+# This allows the joysticks to be connected in any order
+# while not affecting constant joystick ids used in ROS.
+#
+#
+# After adding or editing this file, run the following:
+# sudo udevadm control --reload-rules && udevadm trigger
+# to save changes without needing to reboot the system.
+#
+# Use
+# udevadm info -a /dev/input/js0
+# to see js0's attributes.
+#
+# For more help, see:
+# https://unix.stackexchange.com/questions/66901/how-to-bind-usb-device-under-a-static-name
+# http://www.reactivated.net/writing_udev_rules.html
+# https://forums.gentoo.org/viewtopic-t-953776-start-0.html
+# https://stackoverflow.com/questions/4572805/is-there-a-way-to-see-the-actual-contents-of-a-symlink
+#
+############################################################
+
+# Dualshock 4 (V1) to dev/SDRCDualshock4
+ACTION=="add" \
+, KERNEL=="js*" \
+, ATTRS{idProduct}=="05c4" \
+, ATTRS{idVendor}=="054c" \
+, SYMLINK+="SDRCDualshock4"
+
+# Dualshock 4 (V2) to dev/SDRCDualshock4
+ACTION=="add" \
+, KERNEL=="js*" \
+, ATTRS{idProduct}=="09cc" \
+, ATTRS{idVendor}=="054c" \
+, SYMLINK+="SDRCDualshock4"
