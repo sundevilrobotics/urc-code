@@ -58,37 +58,37 @@ then
 
   if [ -d "$CATKIN/src/roboteq" ]; then
     echo -e "\e[93m\e[4mDeleting roboteq_driver\e[0m"
-    rm -r $CATKIN/src/roboteq/
+    rm -rf $CATKIN/src/roboteq/
     echo
   fi
 
   if [ -d "$CATKIN/src/serial" ]; then
     echo -e "\e[93m\e[4mDeleting serial:\e[0m"
-    rm -r $CATKIN/src/serial/
+    rm -rf $CATKIN/src/serial/
     echo
   fi
 
   if [ -d "$CATKIN/src/joystick_drivers" ]; then
     echo -e "\e[93m\e[4mDeleting joy:\e[0m"
-    rm -r $CATKIN/src/joystick_drivers/
+    rm -rf $CATKIN/src/joystick_drivers/
     echo
   fi
 
-  echo -e "\e[93m\e[4mUnstalling libspnav-dev:\e[0m"
-  echo apt-get purge libspnav-dev
-  sudo apt-get purge libspnav-dev
+  echo -e "\e[93m\e[4mUninstalling libspnav-dev:\e[0m"
+  echo apt-get purge -y libspnav-dev
+  sudo apt-get purge -y libspnav-dev
   echo
-  echo -e "\e[93m\e[4mUnstalling libbluetooth-dev:\e[0m"
-  echo apt-get purge libbluetooth-dev
-  sudo apt-get purge libbluetooth-dev
+  echo -e "\e[93m\e[4mUninstalling libbluetooth-dev:\e[0m"
+  echo apt-get purge -y libbluetooth-dev
+  sudo apt-get purge -y libbluetooth-dev
   echo
-  echo -e "\e[93m\e[4mUnstalling libcwiid-dev:\e[0m"
-  echo apt-get purge libcwiid-dev
-  sudo apt-get purge libcwiid-dev
+  echo -e "\e[93m\e[4mUninstalling libcwiid-dev:\e[0m"
+  echo apt-get purge -y libcwiid-dev
+  sudo apt-get purge -y libcwiid-dev
   echo
-  echo -e "\e[93m\e[4mUnstalling libusb-dev:\e[0m"
-  echo apt-get purge libusb-dev
-  sudo apt-get purge libusb-dev
+  echo -e "\e[93m\e[4mUninstalling libusb-dev:\e[0m"
+  echo apt-get purge -y libusb-dev
+  sudo apt-get purge -y libusb-dev
 
   echo
   echo Successfully uninstalled all dependencies!
