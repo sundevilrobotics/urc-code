@@ -1,24 +1,40 @@
 # Sun Devil Robotics Club's University Rover Competition Code
 
-This code contains the following packages:
-- [drive](drive)
-- [image_processing](image_processing)
-- [learning_joy](learning_joy)
-- [sdrc_arm_v1](sdrc_arm_v1)
+This folder contains the following ROS packages:
+- [arm](arm)
+- [biology](biology)
+- [chassis](chassis)
+- [comms](comms)
+- [control](control)*
+- [sim](sim)
 
 ___
 
-## Package: drive
-Software that interfaces with our RoboteQ FBL2360 to control the four motors in a tank configuration. Currently only supports open-loop command with no sensor feedback. See issues section for more details. *Note: will soon be updated to package: "Chassis."*
+## Package: arm
+Software to control our arm. *Note: currently is supported with rospy.*
 
-## Package: image_processing
-AR tag tracking software (from the ROS package ar_track_alvar) and other OpenCV functionality for onboard video and image processing. *Note: will soon be updated to just a node in package: "JetsonNano."*
+## Package: biology
+Software that interfaces with our biology systems' microcontroller. *Note: currently empty, needs updating.*
 
-## Package: learning_joy
-Software that interfaces with our joystick controllers and publishes their data to topics. *Note: will soon be updated to sub-package: "Control/Joystick."*
+## Package: chassis
+Software that interfaces with our RoboteQ FBL2360 to control the four motors in a tank configuration. Currently only supports open-loop command with no sensor feedback. See issues section for more details.
 
-## Package: sdrc_arm_v1
-Software to control our arm. *Note: will soon be updated to package: "Arm."*
+## Package: comms
+AR tag tracking software (from the ROS package ar_track_alvar) and other OpenCV functionality for onboard video and image processing. *Note: will soon be updated to just a node in package: "jetson_nano".*
+
+## Package Folder: control
+A folder with that contains packages which handle all control elements (i.e. sensors, input devices, and the actual microcontroller code).
+
+## Package: sim
+Software used to simulate our packages. *Note: currently empty, needs updating.*
+
+___
+
+In addition, this folder also contains the following:
+
+- **install.sh** (A script that installs all dependencies needed for urc-code.)
+- **uninstall.sh** (A script that uninstalls all dependencies needed for urc-code.)
+- **extras/etc/udev/...** (Linux udev rules for remapping joysick controllers to new names.)
 
 
 ___

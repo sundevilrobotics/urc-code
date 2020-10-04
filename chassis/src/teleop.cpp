@@ -3,7 +3,7 @@
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "drive");
+  ros::init(argc, argv, "chassis");
 
   ROS_INFO_STREAM("Teleop Mode Enabled");
 
