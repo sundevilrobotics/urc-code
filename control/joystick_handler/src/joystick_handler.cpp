@@ -2,7 +2,7 @@
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
 #include "Configuration.h"
-// #include "learning_joy/RoboteqCommand.h"
+// #include "joystick/RoboteqCommand.h"
 
 // To use: run:
 // roslaunch turtle_joy.launch
@@ -10,7 +10,7 @@
 // Or alternatively:
 // rosrun joy joynode with rosrun
 // and
-// rosrun learning_joy turtle_teleop_joy
+// rosrun joystick turtle_teleop_joy
 
 enum joystickInputs
 {

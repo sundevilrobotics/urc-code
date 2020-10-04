@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(learning_joy)
+project(joystick_handler)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -104,7 +104,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES learning_joy
+#  LIBRARIES joystick_handler
 #  CATKIN_DEPENDS joy roscpp turtlesim
 #  DEPENDS system_lib
 )
@@ -122,7 +122,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/learning_joy.cpp
+#   src/${PROJECT_NAME}/joystick_handler.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -133,7 +133,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/learning_joy_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/joystick_handler_node.cpp)
 
 add_executable(joystick_handler src/joystick_handler.cpp)
 target_link_libraries(joystick_handler ${catkin_LIBRARIES})
@@ -200,7 +200,7 @@ target_link_libraries(joystick_handler ${catkin_LIBRARIES})
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_learning_joy.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_joystick_handler.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
