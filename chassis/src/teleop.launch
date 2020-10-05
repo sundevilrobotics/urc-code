@@ -20,5 +20,6 @@
   </node> 
 
   <include file="$(find learning_joy)/turtle_joy.launch" />-->
+  <include file="$(find joystick_handler)/joystick_handler.launch" />
   <node pkg="chassis" type="teleop" name="teleop_mode" output="screen"/>
 </launch>

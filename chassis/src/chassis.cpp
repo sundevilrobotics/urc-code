@@ -1,5 +1,7 @@
 #include "chassis.h"
 
+bool Chassis::inverted_controls = 0;
+
 // ros::NodeHandle Chassis::nh_l("","");
 //
 // Chassis::Chassis(int mc_1, int mc_2) : drive_left_control("drive_left_control", &str_msg),

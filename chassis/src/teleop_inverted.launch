@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(find joystick_handler)/joystick_handler.launch" />
+  <node pkg="chassis" type="teleop_inverted" name="teleop_mode" output="screen"/>
+</launch>

@@ -4,22 +4,22 @@
 
  <!-- joy node -->
  <group>
-     <remap from='joy' to='j0'/>
+     <remap from='joy' to='joy0'/>
      <node pkg='joy' name='joy0' type='joy_node'>
          <param name='dev' type='string' value='/dev/SDRCDualshock4'/>
      </node>
  </group>
 
- <group>
-     <remap from='joy' to='j1'/>
+ <!-- <group>
+     <remap from='joy' to='joy1'/>
      <node pkg='joy' name='joy1' type='joy_node'>
          <param name='dev' type='string' value='/dev/input/js1'/>
      </node>
- </group>
+ </group> -->
 
  <!-- Axes -->
   <param name="axis_linear" value="1" type="int"/>
-  <param name="axis_angular" value="2" type="int"/>
+  <param name="axis_angular" value="0" type="int"/>
   <param name="scale_linear" value="2" type="double"/>
   <param name="scale_angular" value="2" type="double"/>
 

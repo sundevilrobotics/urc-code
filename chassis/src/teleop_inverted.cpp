@@ -7,7 +7,7 @@ int main(int argc, char** argv)
 
   ROS_INFO_STREAM("Teleop Mode Enabled");
 
-  Chassis::tank_drive();
+  Chassis::tank_drive(1);
 
   ROS_INFO_STREAM("Teleop Mode Disabled");
 }
