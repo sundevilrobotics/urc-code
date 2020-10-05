@@ -69,7 +69,7 @@ private:
 // Set-up subscribers/publishers in constructor
 JoystickHandler::JoystickHandler(int joynum):
   linear_(1),
-  angular_(2)
+  angular_(1)
 {
   nh_.param("axis_linear", linear_, linear_);
   nh_.param("axis_angular", angular_, angular_);
@@ -139,8 +139,8 @@ int main(int argc, char** argv)
   JoystickHandler joy_handler1(1);
 
   // Handler for setting calcualted velocity values
-  ros::NodeHandle vel_handle;
-  ros::Subscriber vel_sub = vel_handle.subscribe("/cmd_vel", 1000, callback);
+  // ros::NodeHandle vel_handle;
+  // ros::Subscriber vel_sub = vel_handle.subscribe("/cmd_vel", 1000, callback);
 
   ros::spin();
 }

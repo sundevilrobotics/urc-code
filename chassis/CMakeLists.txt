@@ -137,8 +137,11 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/chassis_node.cpp)
 
-add_executable(teleop src/teleop.cpp)
+add_executable(teleop src/teleop.cpp src/chassis.cpp)
 target_link_libraries(teleop ${catkin_LIBRARIES})
+
+add_executable(teleop_inverted src/teleop_inverted.cpp src/chassis.cpp)
+target_link_libraries(teleop_inverted ${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

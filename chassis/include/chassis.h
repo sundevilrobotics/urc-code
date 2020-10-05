@@ -29,20 +29,23 @@ public:
   // Joystick data subscriber callback to assign member variables with data
   static void chatterCallback(const sensor_msgs::Joy::ConstPtr& joy)
   {
+
     joyDataLeft = joy->axes[1];  // Left Y Axis
     joyDataRight = joy->axes[4]; // Right Y Axis
 
     joyDataLeft = 2.0/3.1415 * atan(1.8 * pow(joyDataLeft, 1.8) );
     joyDataRight = 2.0/3.1415 * atan(1.8 * pow(joyDataRight, 1.8) );
 
-
   }
 
-  static void update()
+  static void tank_drive(bool inverted = 0)
   {
+    //
+    inverted_controls = inverted;
+
     // Subscriber node to handle joystick input data
     ros::NodeHandle joy_handle;
-    ros::Subscriber sub = joy_handle.subscribe("/j0", 1000, chatterCallback);
+    ros::Subscriber sub = joy_handle.subscribe("/joy0", 1000, chatterCallback);
 
     // Serial objects used to communicate with RoboteQ motor controllers
     serial::Serial my_serial_l("/dev/ttyACM0", 115200, serial::Timeout::simpleTimeout(10)); // 10 ms timeout
@@ -69,13 +72,29 @@ public:
       std::cout << result.length() << ", String read: " << result << std::endl;
 
       // Send new joystick data to motor controllers
-      // Write to left motor controller
-      data = "!G 1 " + std::to_string(-joyDataLeft * 1000) + "\r\n!G 2 " + std::to_string(-joyDataLeft * 1000) + "\r\n";// + std::to_string(joyDataLeft) + "\r\n";
-      size_t bytes_wrote = my_serial_l.write(data);
 
-      // Write to right motor controller
-      data = "!G 1 " + std::to_string(joyDataRight * 1000) + "\r\n!G 2 " + std::to_string(joyDataRight * 1000) + "\r\n";// + std::to_string(joyDataLeft) + "\r\n";
-      bytes_wrote += my_serial_r.write(data);
+      size_t bytes_wrote = 0;
+
+      if(!inverted_controls) // Normal control layout
+      {
+        // Write to left motor controller
+        data = "!G 1 " + std::to_string(-joyDataLeft * 1000) + "\r\n!G 2 " + std::to_string(-joyDataLeft * 1000) + "\r\n";// + std::to_string(joyDataLeft) + "\r\n";
+        bytes_wrote = my_serial_l.write(data);
+
+        // Write to right motor controller
+        data = "!G 1 " + std::to_string(joyDataRight * 1000) + "\r\n!G 2 " + std::to_string(joyDataRight * 1000) + "\r\n";// + std::to_string(joyDataLeft) + "\r\n";
+        bytes_wrote += my_serial_r.write(data);
+      }
+      else // Inverted (Drive the rover backward!)
+      {
+        // Write to left motor controller
+        data = "!G 1 " + std::to_string(joyDataRight * 1000) + "\r\n!G 2 " + std::to_string(joyDataRight * 1000) + "\r\n";// + std::to_string(joyDataLeft) + "\r\n";
+        bytes_wrote = my_serial_l.write(data);
+
+        // Write to right motor controller
+        data = "!G 1 " + std::to_string(-joyDataLeft * 1000) + "\r\n!G 2 " + std::to_string(-joyDataLeft * 1000) + "\r\n";// + std::to_string(joyDataLeft) + "\r\n";
+        bytes_wrote += my_serial_r.write(data);
+      }
 
       // Verify the data was sent correctly
       std::cout << "BYTES: " << bytes_wrote << " ; command: " << data << std::endl;
@@ -85,6 +104,9 @@ public:
       loop_rate.sleep();
     }
   }
+
+  private:
+    static bool inverted_controls;
 };
 
 #endif
