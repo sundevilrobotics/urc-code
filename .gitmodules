@@ -1,0 +1,4 @@
+[submodule "control/lidar/sdrc_rplidar_ros"]
+	path = control/lidar/sdrc_rplidar_ros
+	url = https://github.com/sundevilrobotics/rplidar_ros
+	branch = master
