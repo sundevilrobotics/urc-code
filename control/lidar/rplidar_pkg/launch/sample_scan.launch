@@ -1,0 +1,15 @@
+
+
+
+<launch>
+  
+  <node name="rosbag" pkg="rosbag" type="play" output="screen" args="-s 35 /home/charles/catkin_ws/src/rplidar_pkg/bag_files/sample_scan.bag" />
+  
+
+  <node name="scan_subscribe" pkg="rplidar_pkg" type="scan_subscribe" />  
+
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find rplidar_pkg)/rviz/rplidar.rviz" /> 
+
+
+</launch>
