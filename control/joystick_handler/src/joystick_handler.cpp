@@ -79,8 +79,11 @@ JoystickHandler::JoystickHandler(int joynum):
   // Get joystick info from /joy
   joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("j"+std::to_string(joynum), 10, &JoystickHandler::joyCallback, this);
 
+  std::string topic_name;
+  nh_.getParam("joy_pub_topic", topic_name);
+
   // Set joystick values in /cmd_vel
-  vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
+  vel_pub_ = nh_.advertise<geometry_msgs::Twist>(topic_name, 1);
 
   id = joynum;
 }

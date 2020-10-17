@@ -22,7 +22,7 @@
   <param name="axis_angular" value="0" type="int"/>
   <param name="scale_linear" value="2" type="double"/>
   <param name="scale_angular" value="2" type="double"/>
-  <param name='joy_pub_topic' type='string' value='chassis/cmd_vel'/>
+  <param name='joy_pub_topic' type='string' value='/turtle1/cmd_vel'/>
 
   <!-- NOTE: pgk and type do not have to match-->
   <node pkg="joystick_handler" type="joystick_handler" name="teleop" output="screen"/>
