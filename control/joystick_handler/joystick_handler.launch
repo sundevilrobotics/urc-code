@@ -4,8 +4,8 @@
 
  <!-- joy node -->
  <group>
-     <remap from='joy' to='j0'/>
-     <node pkg='joy' name='j0' type='joy_node'>
+     <remap from='joy' to='joy0'/>
+     <node pkg='joy' name='joy0' type='joy_node'>
          <param name='dev' type='string' value='/dev/SDRCDualshock4'/>
      </node>
  </group>
@@ -22,8 +22,8 @@
   <param name="axis_angular" value="0" type="int"/>
   <param name="scale_linear" value="2" type="double"/>
   <param name="scale_angular" value="2" type="double"/>
-  <param name='joy_pub_topic' type='string' value='chassis/cmd_vel'/>
+  <param name='joy_pub_topic' type='string' value='joy0'/>
 
   <!-- NOTE: pgk and type do not have to match-->
-  <node pkg="joystick_handler" type="joystick_handler" name="teleop" output="screen"/>
+  <node pkg="joystick_handler" type="joystick_handler" name="joystick_handler" output="screen"/>
 </launch>

@@ -4,8 +4,8 @@
 
  <!-- joy node -->
  <group>
-     <remap from='joy' to='j0'/>
-     <node pkg='joy' name='j0' type='joy_node'>
+     <remap from='joy' to='joy0'/>
+     <node pkg='joy' name='joy0' type='joy_node'>
          <param name='dev' type='string' value='/dev/SDRCDualshock4'/>
      </node>
  </group>

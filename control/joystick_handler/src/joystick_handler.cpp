@@ -77,13 +77,13 @@ JoystickHandler::JoystickHandler(int joynum):
   nh_.param("scale_linear", l_scale_, l_scale_);
 
   // Get joystick info from /joy
-  joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("j"+std::to_string(joynum), 10, &JoystickHandler::joyCallback, this);
+  joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy"+std::to_string(joynum), 10, &JoystickHandler::joyCallback, this);
 
   std::string topic_name;
   nh_.getParam("joy_pub_topic", topic_name);
 
   // Set joystick values in /cmd_vel
-  vel_pub_ = nh_.advertise<geometry_msgs::Twist>(topic_name, 1);
+  vel_pub_ = nh_.advertise<sensor_msgs::Joy>(topic_name, 1);
 
   id = joynum;
 }
@@ -116,10 +116,10 @@ void JoystickHandler::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   std::cout << "\033[0m\n";
   // printf("\n");
 
-  geometry_msgs::Twist twist;
-  twist.angular.z = joy->axes[angular_]; // Set rotation axis data
-  twist.linear.x = joy->axes[linear_]; // Set forward/backward axis data
-  vel_pub_.publish(twist);
+  // geometry_msgs::Twist twist;
+  // twist.angular.z = joy->axes[angular_]; // Set rotation axis data
+  // twist.linear.x = joy->axes[linear_]; // Set forward/backward axis data
+  // vel_pub_.publish(twist);
 }
 
 void callback(const geometry_msgs::Twist::ConstPtr& msg){
