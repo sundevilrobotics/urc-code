@@ -9,7 +9,7 @@ project(chassis)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  learning_joy
+  joystick_handler
   roboteq_driver
   roboteq_msgs
   serial
@@ -107,7 +107,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES chassis
-#  CATKIN_DEPENDS joy roscpp turtlesim learning_joy
+#  CATKIN_DEPENDS joy roscpp turtlesim joystick_handler
 #  DEPENDS system_lib
 )
 

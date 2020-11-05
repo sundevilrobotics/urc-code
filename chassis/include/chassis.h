@@ -6,8 +6,8 @@
 #include <std_msgs/String.h>
 #include <stdio.h>
 #include <sensor_msgs/Joy.h>
-#include "roboteq_msgs/Command.h"
-#include <std_msgs/String.h>
+//#include "roboteq_msgs/Command.h"
+//#include <std_msgs/String.h>
 #include <stdio.h>
 
 #include <string>
