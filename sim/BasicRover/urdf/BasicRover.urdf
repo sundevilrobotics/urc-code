@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="BasicRover">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.020316 0.083324 -0.009927"
+        rpy="0 0 0" />
+      <mass
+        value="11.153" />
+      <inertia
+        ixx="0.49006"
+        ixy="-0.0043996"
+        ixz="4.0854E-17"
+        iyy="0.75865"
+        iyz="2.4555E-17"
+        izz="0.43276" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="Wheel1">
+    <inertial>
+      <origin
+        xyz="0 0 0.0254"
+        rpy="0 0 0" />
+      <mass
+        value="0.40542" />
+      <inertia
+        ixx="0.00035283"
+        ixy="-1.3553E-20"
+        ixz="-1.8705E-20"
+        iyy="0.00035283"
+        iyz="1.1729E-21"
+        izz="0.00053129" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/Wheel1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/Wheel1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="WJoint1"
+    type="continuous">
+    <origin
+      xyz="-0.1983 -0.27265 -0.1729"
+      rpy="1.5708 -1.1698 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Wheel1" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="Wheel2">
+    <inertial>
+      <origin
+        xyz="2.7756E-17 0 0.0254"
+        rpy="0 0 0" />
+      <mass
+        value="0.40542" />
+      <inertia
+        ixx="0.00035283"
+        ixy="2.7105E-20"
+        ixz="-2.1283E-20"
+        iyy="0.00035283"
+        iyz="-9.4643E-23"
+        izz="0.00053129" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/Wheel2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/Wheel2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="WJoint2"
+    type="continuous">
+    <origin
+      xyz="-0.0078028 -0.27265 -0.1729"
+      rpy="1.5708 0.58894 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Wheel2" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="Wheel3">
+    <inertial>
+      <origin
+        xyz="0 0 0.0254"
+        rpy="0 0 0" />
+      <mass
+        value="0.40542" />
+      <inertia
+        ixx="0.00035283"
+        ixy="-9.9099E-40"
+        ixz="-4.927E-37"
+        iyy="0.00035283"
+        iyz="-1.043E-36"
+        izz="0.00053129" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/Wheel3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/Wheel3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="WJoint3"
+    type="continuous">
+    <origin
+      xyz="0.23985 -0.27265 -0.1729"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Wheel3" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="Wheel4">
+    <inertial>
+      <origin
+        xyz="0 0 -0.0254"
+        rpy="0 0 0" />
+      <mass
+        value="0.40542" />
+      <inertia
+        ixx="0.00035283"
+        ixy="-9.9099E-40"
+        ixz="-4.927E-37"
+        iyy="0.00035283"
+        iyz="-1.043E-36"
+        izz="0.00053129" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/Wheel4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/Wheel4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="WJoint4"
+    type="continuous">
+    <origin
+      xyz="0.23985 0.2925 -0.1729"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Wheel4" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="Wheel5">
+    <inertial>
+      <origin
+        xyz="8.6736E-19 2.7756E-17 -0.0254"
+        rpy="0 0 0" />
+      <mass
+        value="0.40542" />
+      <inertia
+        ixx="0.00035283"
+        ixy="-9.9099E-40"
+        ixz="-4.927E-37"
+        iyy="0.00035283"
+        iyz="-1.043E-36"
+        izz="0.00053129" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/Wheel5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/Wheel5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="WJoint5"
+    type="continuous">
+    <origin
+      xyz="-0.0078028 0.2925 -0.1729"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Wheel5" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="Wheel6">
+    <inertial>
+      <origin
+        xyz="0 0 -0.0254"
+        rpy="0 0 0" />
+      <mass
+        value="0.40542" />
+      <inertia
+        ixx="0.00035283"
+        ixy="-9.9099E-40"
+        ixz="-4.927E-37"
+        iyy="0.00035283"
+        iyz="-1.043E-36"
+        izz="0.00053129" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/Wheel6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BasicRover/meshes/Wheel6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="WJoint6"
+    type="continuous">
+    <origin
+      xyz="-0.1983 0.2925 -0.1729"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Wheel6" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+
+  <gazebo>
+    <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryRate>20.0</odometryRate>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+    </plugin>
+  </gazebo>
+</robot>
