@@ -9,7 +9,7 @@ project(chassis)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  learning_joy
+  joystick_handler
   roboteq_driver
   roboteq_msgs
   serial

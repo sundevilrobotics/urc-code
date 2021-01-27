@@ -58,9 +58,9 @@
   <exec_depend>roscpp</exec_depend>
   <exec_depend>turtlesim</exec_depend>
 
-  <build_depend>learning_joy</build_depend>
-  <build_export_depend>learning_joy</build_export_depend>
-  <exec_depend>learning_joy</exec_depend>
+  <build_depend>joystick_handler</build_depend>
+  <build_export_depend>joystick_handler</build_export_depend>
+  <exec_depend>joystick_handler</exec_depend>
   <build_depend>serial</build_depend>
   <build_export_depend>serial</build_export_depend>
   <exec_depend>serial</exec_depend>
