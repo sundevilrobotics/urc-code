@@ -37,3 +37,14 @@ ACTION=="add" \
 , ATTRS{idProduct}=="09cc" \
 , ATTRS{idVendor}=="054c" \
 , SYMLINK+="SDRCDualshock4"
+
+# Arduino UNO Green
+ACTION=="add" \
+, ATTRS{serial}=="5563931343335131F002" \
+, SYMLINK+="ArduinoUnoGreen"
+
+# Arduino UNO Blue
+ACTION=="add" \
+, ATTRS{serial}=="758353339333517191C2" \
+, SYMLINK+="ArduinoUnoBlue"
+
