@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Autostart script for the main Raspberry Pi 4b
+# on SDRC's URC rover.
+
+echo "Starting SDRC Main Rasberry Pi...".
+echo "Starting roscore in a new terminal window..."
+
+# Start roscore
+xfce4-terminal -e 'bash -c "PATH=$PATH:/opt/ros/melodic/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin; \
+export PATH; source /opt/ros/melodic/setup.bash; roscore; bash"'
+
+read -p "Waiting for roscore to finish startup..." -t 6.0
+echo "Continuing"
+
+echo "Starting rviz in a new terminal window..."
+# Start rviz
+xfce4-terminal -e 'bash -c "PATH=$PATH:/opt/ros/melodic/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin; \
+export PATH; source /opt/ros/melodic/setup.bash; rviz; bash"'
+
+read -p "Waiting for rviz to finish startup..." -t 3.0
+
+echo "Finished autostart on SDRC Main Raspberry Pi"
+echo "Ready"
