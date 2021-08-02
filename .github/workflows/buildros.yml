@@ -63,7 +63,7 @@ jobs:
           chmod +x "${GITHUB_WORKSPACE}/install.sh"
 
           # run script
-          "${GITHUB_WORKSPACE}/install.sh"
+          "${GITHUB_WORKSPACE}/install.sh" -f
 
       - name: catkin_make install.sh Packages
         run: |
