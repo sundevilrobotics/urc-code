@@ -46,11 +46,11 @@ jobs:
           curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
           sudo apt update
           sudo apt install ros-melodic-ros-base
-          sudo apt install ros-melodic-catkin
           source /opt/ros/melodic/setup.bash
 
       - name: Make Catkin Workspace
         run: |
+          source /opt/ros/melodic/setup.bash
           mkdir -p ~/catkin_ws/src
           cd ~/catkin_ws/
           catkin_make
@@ -58,6 +58,7 @@ jobs:
 
       - name: Install ROS Packages from install.sh
         run: |
+          source /opt/ros/melodic/setup.bash
           # make file runnable, might not be necessary
           chmod +x "${GITHUB_WORKSPACE}/install.sh"
 
@@ -66,10 +67,12 @@ jobs:
 
       - name: catkin_make install.sh Packages
         run: |
+          source /opt/ros/melodic/setup.bash
           catkin_make
           source devel/setup.bash
 
       - name: catkin_make sundevilrobotics/urc-code
         run: |
+          source /opt/ros/melodic/setup.bash
           ln -s $GITHUB_WORKSPACE ~/catkin_ws/src/urc-code
           catkin_make
