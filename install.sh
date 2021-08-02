@@ -45,10 +45,12 @@ if [ $ntoinstall == 0 ]; then
   exit 0
 fi
 
-read -p 'y/n: ' continue
+if [ $# -eq 0 ]; then
+  read -p 'y/n: ' continue
+fi
 
-if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
-  if [ $continue = "y" ] || [ $continue = "Y" ] || [ $continue = "yes" ] || [ $continue = "Yes" ]
+if [ $1 = "-f" ] || ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
+  if [ $1 = "-f" ] || [ $continue = "y" ] || [ $continue = "Y" ] || [ $continue = "yes" ] || [ $continue = "Yes" ]
   then
 
     echo -e "\e[93m\e[4mUpdating repository:\e[0m"
@@ -62,12 +64,12 @@ if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
       exit 1
     fi
 
-    if [ ! -d "$CATKIN/src/roboteq" ]; then
-      echo -e "\e[93m\e[4mInstalling roboteq_driver:\e[0m"
-      cd $CATKIN/src/
-      git clone https://github.com/g/roboteq.git
-      echo
-    fi
+    # if [ ! -d "$CATKIN/src/roboteq" ]; then
+    #   echo -e "\e[93m\e[4mInstalling roboteq_driver:\e[0m"
+    #   cd $CATKIN/src/
+    #   git clone https://github.com/g/roboteq.git
+    #   echo
+    # fi
 
     if [ ! -d "$CATKIN/src/serial" ]; then
       echo -e "\e[93m\e[4mInstalling serial:\e[0m"
