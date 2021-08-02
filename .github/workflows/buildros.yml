@@ -46,6 +46,7 @@ jobs:
           curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
           sudo apt update
           sudo apt install ros-melodic-ros-base
+          sudo apt install ros-melodic-catkin python-catkin-tools
           source /opt/ros/melodic/setup.bash
 
       - name: Make Catkin Workspace
