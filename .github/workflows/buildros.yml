@@ -53,6 +53,7 @@ jobs:
           source /opt/ros/melodic/setup.bash
           mkdir -p ~/catkin_ws/src
           cd ~/catkin_ws/
+          catkin config -DCATKIN_ENABLE_TESTING=0
           catkin_make
           source devel/setup.bash
 
@@ -61,6 +62,8 @@ jobs:
           source /opt/ros/melodic/setup.bash
           # make file runnable, might not be necessary
           chmod +x "${GITHUB_WORKSPACE}/install.sh"
+          
+          catkin config -DCATKIN_ENABLE_TESTING=0
 
           # run script
           "${GITHUB_WORKSPACE}/install.sh" -f
@@ -69,6 +72,7 @@ jobs:
         run: |
           source /opt/ros/melodic/setup.bash
           cd ~/catkin_ws/
+          catkin config -DCATKIN_ENABLE_TESTING=0
           catkin_make
           source devel/setup.bash
 
@@ -77,4 +81,5 @@ jobs:
           source /opt/ros/melodic/setup.bash
           ln -s $GITHUB_WORKSPACE ~/catkin_ws/src/urc-code
           cd ~/catkin_ws/
+          catkin config -DCATKIN_ENABLE_TESTING=0
           catkin_make
