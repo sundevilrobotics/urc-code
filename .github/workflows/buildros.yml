@@ -68,6 +68,7 @@ jobs:
       - name: catkin_make install.sh Packages
         run: |
           source /opt/ros/melodic/setup.bash
+          cd ~/catkin_ws/
           catkin_make
           source devel/setup.bash
 
@@ -75,4 +76,5 @@ jobs:
         run: |
           source /opt/ros/melodic/setup.bash
           ln -s $GITHUB_WORKSPACE ~/catkin_ws/src/urc-code
+          cd ~/catkin_ws/
           catkin_make
