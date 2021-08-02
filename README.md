@@ -1,5 +1,11 @@
 # Sun Devil Robotics Club's University Rover Competition Code
 
+Current Build Status:
+
+(`develop`) &nbsp; ![develop branch build status](https://github.com/sundevilrobotics/urc-code/actions/workflows/buildros.yml/badge.svg?branch=develop)
+
+___
+
 This folder contains the following ROS packages:
 - [arm](arm)
 - [biology](biology)
