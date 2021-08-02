@@ -1,0 +1,74 @@
+name: Build ROS Workspace Using catkin_make
+
+# Inspiration came from https://answers.ros.org/question/336103/github-actions-catkin-build-example/
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the develop branch
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build_ros_job:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-18.04
+
+    env:
+      ROS_DISTRO: melodic
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2.3.4
+
+      # # Runs a single command using the runners shell
+      # - name: Run a one-line script
+      #   run: echo Hello, world!
+
+      # # Runs a set of commands using the runners shell
+      # - name: Run a multi-line script
+      #   run: |
+      #     echo Add other actions to build,
+      #     echo test, and deploy your project.
+
+      # Runs a set of commands using the runners shell
+      - name: Install ROS
+        run: |
+          sudo sh -c 'echo \"deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main\" > /etc/apt/sources.list.d/ros-latest.list'
+          sudo apt install curl
+          curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+          sudo apt update
+          sudo apt install ros-melodic-ros-base
+          source /opt/ros/melodic/setup.bash
+
+      - name: Make Catkin Workspace
+        run: |
+          mkdir -p ~/catkin_ws/src
+          cd ~/catkin_ws/
+          catkin_make
+          source devel/setup.bash
+
+      - name: Install ROS Packages from install.sh
+        run: |
+          # make file runnable, might not be necessary
+          chmod +x "${GITHUB_WORKSPACE}/install.sh"
+
+          # run script
+          "${GITHUB_WORKSPACE}/install.sh"
+
+      - name: catkin_make install.sh Packages
+        run: |
+          catkin_make
+          source devel/setup.bash
+
+      - name: catkin_make sundevilrobotics/urc-code
+        run: |
+          ln -s $GITHUB_WORKSPACE ~/catkin_ws/src/urc-code
+          catkin_make
