@@ -1,0 +1,38 @@
+<!-- <launch>
+
+  <arg name="heartbeat_rate" default="5.0"/>
+
+  <node name="any_robot_activity" pkg="robot_activity" type="robot_activity_node">
+    <param name="wait_for_supervisor" type="bool" value="false" />
+    <param name="autostart" type="bool" value="true" />
+    <param name="heartbeat_rate" type="double" value="$(arg heartbeat_rate)" />
+  </node>
+
+  <test test-name="heartbeat_hz_test" pkg="rostest" type="hztest" name="heartbeat_hz_test">
+    <param name="hz" value="$(arg heartbeat_rate)" />
+    <param name="hzerror" value="0.2" />
+    <param name="test_duration" value="5.0" />
+    <param name="topic" value="/heartbeat" />
+  </test>
+
+</launch> -->
+
+
+<launch>
+  <arg name="wait_for_supervisor" default="false" />
+  <arg name="autostart" default="true" />
+  <arg name="autostart_after_reconfigure" default="false"/>
+  <arg name="heartbeat_rate" default="1.0"/>
+
+  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find robot_activity_tutorials)/rosconsole.conf"/>
+  <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${logger}] [${time}]: ${message}"/>
+
+  <node pkg="brandon_testing" type="heartbeat_test" name="heartbeat_test"
+    output="screen">
+    <param name="wait_for_supervisor" type="bool" value="$(arg wait_for_supervisor)" />
+    <param name="autostart" type="bool" value="$(arg autostart)" />
+    <param name="autostart_after_reconfigure" type="bool" value="$(arg autostart_after_reconfigure)" />
+    <param name="heartbeat_rate" type="double" value="$(arg heartbeat_rate)" />
+  </node>
+
+</launch>

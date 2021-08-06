@@ -1,0 +1,10 @@
+<launch>
+  <node pkg="brandon_testing" type="bondtestmaster" name="time_test1"
+    output="screen">
+      <!-- <remap from='time' to='t0'/> -->
+  </node>
+  <node pkg="brandon_testing" type="bondtestslave" name="time_test2"
+    output="screen">
+      <!-- <remap from='time' to='t1'/> -->
+  </node>
+</launch>
