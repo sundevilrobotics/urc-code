@@ -23,7 +23,7 @@ Software to control our arm. *Note: currently is supported with rospy.*
 Software that interfaces with our biology systems' microcontroller. *Note: currently empty, needs updating.*
 
 ## Package: chassis
-Software that interfaces with our RoboteQ FBL2360 to control the four motors in a tank configuration. Currently only supports open-loop command with no sensor feedback. See issues section for more details.
+~~Software that interfaces with our RoboteQ FBL2360 to control the four motors in a tank configuration. Currently only supports open-loop command with no sensor feedback.~~ See issues section for more details.
 
 ## Package: comms
 AR tag tracking software (from the ROS package ar_track_alvar) and other OpenCV functionality for onboard video and image processing. *Note: will soon be updated to just a node in package: "jetson_nano".*
