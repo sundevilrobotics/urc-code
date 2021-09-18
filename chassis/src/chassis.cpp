@@ -1,6 +1,11 @@
 #include "chassis.h"
 
 bool Chassis::inverted_controls = 0;
+float Chassis::joyDataLeft = 0;
+float Chassis::joyDataRight = 0;
+float Chassis::set_linear_velocity = 0;
+float Chassis::set_rotational_velocity = 0;
+ros::Publisher Chassis::vel_pub;
 
 // ros::NodeHandle Chassis::nh_l("","");
 //
@@ -12,3 +17,4 @@ bool Chassis::inverted_controls = 0;
 //   nh_l.initNode(cont_port_1);
 //   nh_r.initNode(cont_port_2);
 // }
+

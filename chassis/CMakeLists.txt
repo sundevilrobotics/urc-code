@@ -107,7 +107,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES chassis
-#  CATKIN_DEPENDS joy roscpp turtlesim learning_joy
+#  CATKIN_DEPENDS joy roscpp turtlesim learning_joy roboteq_msgs
 #  DEPENDS system_lib
 )
 
@@ -142,6 +142,12 @@ target_link_libraries(teleop ${catkin_LIBRARIES})
 
 add_executable(teleop_inverted src/teleop_inverted.cpp src/chassis.cpp)
 target_link_libraries(teleop_inverted ${catkin_LIBRARIES})
+
+add_executable(control src/chassis_control.cpp src/chassis.cpp)
+target_link_libraries(control ${catkin_LIBRARIES})
+
+add_executable(create_cmd_vel src/chassis_create_cmd_vel.cpp src/chassis.cpp)
+target_link_libraries(create_cmd_vel ${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
