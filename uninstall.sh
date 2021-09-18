@@ -39,6 +39,22 @@ if  dpkg -l | grep -qw libusb-dev; then
   printf "\tlibusb-dev\n"
   let "ntoinstall++"
 fi
+if ! dpkg -l | grep -qw ros-melodic-diagnostics; then
+  printf "\tros-melodic-diagnostics\n"
+  let "ntoinstall++"
+fi
+if ! dpkg -l | grep -qw ros-melodic-roslint; then
+  printf "\tros-melodic-roslint\n"
+  let "ntoinstall++"
+fi
+if ! dpkg -l | grep -qw ros-melodic-turtlesim; then
+  printf "\tros-melodic-turtlesim\n"
+  let "ntoinstall++"
+fi
+if ! dpkg -l | grep -qw libx11-dev; then
+  printf "\tlibx11-dev\n"
+  let "ntoinstall++"
+fi
 
 if [ $ntoinstall == 0 ]; then
   echo -e "\e[1m\nNo installed dependencies found! Exiting..."
@@ -75,20 +91,36 @@ then
   fi
 
   echo -e "\e[93m\e[4mUninstalling libspnav-dev:\e[0m"
-  echo apt-get purge -y libspnav-dev
-  sudo apt-get purge -y libspnav-dev
+  echo apt purge -y libspnav-dev
+  sudo apt purge -y libspnav-dev
   echo
   echo -e "\e[93m\e[4mUninstalling libbluetooth-dev:\e[0m"
-  echo apt-get purge -y libbluetooth-dev
-  sudo apt-get purge -y libbluetooth-dev
+  echo apt purge -y libbluetooth-dev
+  sudo apt purge -y libbluetooth-dev
   echo
   echo -e "\e[93m\e[4mUninstalling libcwiid-dev:\e[0m"
-  echo apt-get purge -y libcwiid-dev
-  sudo apt-get purge -y libcwiid-dev
+  echo apt purge -y libcwiid-dev
+  sudo apt purge -y libcwiid-dev
   echo
   echo -e "\e[93m\e[4mUninstalling libusb-dev:\e[0m"
-  echo apt-get purge -y libusb-dev
-  sudo apt-get purge -y libusb-dev
+  echo apt purge -y libusb-dev
+  sudo apt purge -y libusb-dev
+    echo
+    echo -e "\e[93m\e[4mInstalling ros-melodic-diagnostics:\e[0m"
+    echo apt purge -y ros-melodic-diagnostics
+    sudo apt purge -y ros-melodic-diagnostics
+    echo
+    echo -e "\e[93m\e[4mInstalling ros-melodic-roslint:\e[0m"
+    echo apt purge -y ros-melodic-roslint
+    sudo apt purge -y ros-melodic-roslint
+    echo
+    echo -e "\e[93m\e[4mInstalling ros-melodic-turtlesim:\e[0m"
+    echo apt purge -y ros-melodic-turtlesim
+    sudo apt purge -y ros-melodic-turtlesim
+echo
+    echo -e "\e[93m\e[4mInstalling libx11-dev:\e[0m"
+    echo apt purge -y libx11-dev
+    sudo apt purge -y libx11-dev
 
   echo
   echo Successfully uninstalled all dependencies!
