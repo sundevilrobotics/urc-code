@@ -39,6 +39,22 @@ if ! dpkg -l | grep -qw libusb-dev; then
   printf "\tlibusb-dev\n"
   let "ntoinstall++"
 fi
+if ! dpkg -l | grep -qw ros-melodic-diagnostics; then
+  printf "\tros-melodic-diagnostics\n"
+  let "ntoinstall++"
+fi
+if ! dpkg -l | grep -qw ros-melodic-roslint; then
+  printf "\tros-melodic-roslint\n"
+  let "ntoinstall++"
+fi
+if ! dpkg -l | grep -qw ros-melodic-turtlesim; then
+  printf "\tros-melodic-turtlesim\n"
+  let "ntoinstall++"
+fi
+if ! dpkg -l | grep -qw libx11-dev; then
+  printf "\tlibx11-dev\n"
+  let "ntoinstall++"
+fi
 
 if [ $ntoinstall == 0 ]; then
   echo -e "\e[1m\nYou are all up to date! Exiting..."
@@ -88,20 +104,37 @@ if [ $1 = "-f" ] || ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
     fi
 
     echo -e "\e[93m\e[4mInstalling libspnav-dev:\e[0m"
-    echo apt-get install libspnav-dev
-    sudo apt-get install libspnav-dev
+    echo apt install -y libspnav-dev
+    sudo apt install -y libspnav-dev
     echo
     echo -e "\e[93m\e[4mInstalling libbluetooth-dev:\e[0m"
-    echo apt-get install libbluetooth-dev
-    sudo apt-get install libbluetooth-dev
+    echo apt install -y libbluetooth-dev
+    sudo apt install -y libbluetooth-dev
     echo
     echo -e "\e[93m\e[4mInstalling libcwiid-dev:\e[0m"
-    echo apt-get install libcwiid-dev
-    sudo apt-get install libcwiid-dev
+    echo apt install -y libcwiid-dev
+    sudo apt install -y libcwiid-dev
     echo
     echo -e "\e[93m\e[4mInstalling libusb-dev:\e[0m"
-    echo apt-get install libusb-dev
-    sudo apt-get install libusb-dev
+    echo apt install -y libusb-dev
+    sudo apt install -y libusb-dev
+    echo
+    echo -e "\e[93m\e[4mInstalling ros-melodic-diagnostics:\e[0m"
+    echo apt install -y ros-melodic-diagnostics
+    sudo apt install -y ros-melodic-diagnostics
+    echo
+    echo -e "\e[93m\e[4mInstalling ros-melodic-roslint:\e[0m"
+    echo apt install -y ros-melodic-roslint
+    sudo apt install -y ros-melodic-roslint
+    echo
+    echo -e "\e[93m\e[4mInstalling ros-melodic-turtlesim:\e[0m"
+    echo apt install -y ros-melodic-turtlesim
+    sudo apt install -y ros-melodic-turtlesim
+    echo
+    echo -e "\e[93m\e[4mInstalling libx11-dev:\e[0m"
+    echo apt install -y libx11-dev
+    sudo apt install -y libx11-dev
+    echo
 
     echo -e "\e[93m\e[4mRunning catkin_make:\e[0m"
     echo cd $CATKIN
