@@ -1,7 +1,7 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
-#include "Configuration.h"
+#include "../include/Configuration.h"
 // #include "joystick/RoboteqCommand.h"
 
 // To use: run:
@@ -44,7 +44,6 @@ enum joystickInputs
 //   float value[21];
 // };
 
-
 class JoystickHandler
 {
 public:
@@ -53,7 +52,7 @@ public:
   int id;
 
 private:
-  void joyCallback(const sensor_msgs::Joy::ConstPtr& joy);
+  void joyCallback(const sensor_msgs::Joy::ConstPtr &joy);
 
   ros::NodeHandle nh_;
 
@@ -63,13 +62,11 @@ private:
   double l_scale_, a_scale_;
   ros::Publisher vel_pub_;
   ros::Subscriber joy_sub_;
-
 };
 
 // Set-up subscribers/publishers in constructor
-JoystickHandler::JoystickHandler(int joynum):
-  linear_(1),
-  angular_(1)
+JoystickHandler::JoystickHandler(int joynum) : linear_(1),
+                                               angular_(1)
 {
   nh_.param("axis_linear", linear_, linear_);
   nh_.param("axis_angular", angular_, angular_);
@@ -77,7 +74,7 @@ JoystickHandler::JoystickHandler(int joynum):
   nh_.param("scale_linear", l_scale_, l_scale_);
 
   // Get joystick info from /joy
-  joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("j"+std::to_string(joynum), 10, &JoystickHandler::joyCallback, this);
+  joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("j" + std::to_string(joynum), 10, &JoystickHandler::joyCallback, this);
 
   std::string topic_name;
   nh_.getParam("joy_pub_topic", topic_name);
@@ -93,48 +90,48 @@ float JoystickHandler::getValue(joystickInputs i)
   return values[i];
 }
 
-void JoystickHandler::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
+void JoystickHandler::joyCallback(const sensor_msgs::Joy::ConstPtr &joy)
 {
-  if(id == 0)
+  if (id == 0)
   {
     std::cout << "\033[1;33m";
   }
-  else if(1)
+  else if (1)
   {
     std::cout << "\033[1;36m";
   }
-  for(int i = 0; i < 8; i++)
+  for (int i = 0; i < 8; i++)
   {
     values[i] = joy->axes[i];
     printf("%f ", values[i]);
   }
-  for(int i = 0; i < 13; i++)
+  for (int i = 0; i < 13; i++)
   {
-    values[i+8] = joy->buttons[i];
-    printf("%i ", (int)values[i+8]);
+    values[i + 8] = joy->buttons[i];
+    printf("%i ", (int)values[i + 8]);
   }
   std::cout << "\033[0m\n";
   // printf("\n");
 
   geometry_msgs::Twist twist;
-  twist.angular.z = joy->axes[angular_]; // Set rotation axis data
-  twist.linear.x = joy->axes[linear_]; // Set forward/backward axis data
+  twist.angular.z = joy->axes[angular_] * MAX_TURN; // Set rotation axis data
+  twist.linear.x = joy->axes[linear_] * MAX_SPEED;  // Set forward/backward axis data
   vel_pub_.publish(twist);
 }
 
-void callback(const geometry_msgs::Twist::ConstPtr& msg){
-    double linear = msg->linear.x;
-    double angular = msg->angular.z;
-    double leftVelocity;  //Velocity 1
-    double rightVelocity;  //Velocity 2
-    leftVelocity = linear - TRACK_WIDTH * angular/2;
-    rightVelocity = linear + TRACK_WIDTH * angular/2;
+void callback(const geometry_msgs::Twist::ConstPtr &msg)
+{
+  double linear = msg->linear.x;
+  double angular = msg->angular.z;
+  double leftVelocity;  //Velocity 1
+  double rightVelocity; //Velocity 2
+  leftVelocity = linear - TRACK_WIDTH * angular / 2;
+  rightVelocity = linear + TRACK_WIDTH * angular / 2;
 
-    // ROS_INFO("%f, %f", leftVelocity, rightVelocity);
+  // ROS_INFO("%f, %f", leftVelocity, rightVelocity);
 }
 
-
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
   ros::init(argc, argv, "joy_handler");
 
