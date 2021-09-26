@@ -38,6 +38,13 @@ ACTION=="add" \
 , ATTRS{idVendor}=="054c" \
 , SYMLINK+="SDRCDualshock4"
 
+# Logitech Extreme 3D Pro Flight Joystick to dev/SDRCFlightJoystick
+ACTION=="add" \
+, KERNEL=="js*" \
+, ATTRS{idProduct}=="c215" \
+, ATTRS{idVendor}=="046d" \
+, SYMLINK+="SDRCFlightJoystick"
+
 # Arduino UNO Green
 ACTION=="add" \
 , ATTRS{serial}=="5563931343335131F002" \
