@@ -1,4 +1,37 @@
 #!/bin/bash
+
+Help()
+{
+   # Display Help
+   echo "Add description of the script functions here."
+   echo
+   echo "Syntax: scriptTemplate [-g|h|v|V]"
+   echo "options:"
+   echo "g     Print the GPL license notification."
+   echo "h     Print this Help."
+   echo "v     Verbose mode."
+   echo "V     Print software version and exit."
+   echo
+}
+
+test_mode=False
+
+while getopts ":ht" option; do
+   case $option in
+      h) # display Help
+        Help
+        exit;;
+      t) # test mode for automated gtests
+        test_mode=True
+        echo "TEST MODE ENABLED";;
+      *)
+        echo "Incorrect arguments passed!"
+        echo ""
+        Help
+        exit;;
+   esac
+done
+
 format='\e[93m\e[1m\e[4m'
 yellow='\e[93m'
 cyan='\e[96m'
@@ -66,12 +99,17 @@ echo ""
 echo You are on ROS $ROS_DISTRO.
 echo -e "${format}Do you wish to continue?${clearformat}"
 
+if [ $test_mode == "False" ]; then
 read -p 'y/n: ' cont
 case $cont in  
   y|Y) cont=True ;; 
   n|N) cont=False ;; 
   *) cont=False ;; 
 esac
+else
+  cont=True
+  echo "y"
+fi
 
 if [ $cont == "False" ]; then
   echo "Exiting."
@@ -167,8 +205,40 @@ else
   fi
 fi
 
-echo "Compiling additional packages..."
 echo ""
+echo -e "${cyan}${underline}Compiling additional packages...${clearformat}"
+echo "NO ADDITIONAL PACKAGES TO COMPILE"
+
+
+
+
+if [ ! -f /etc/udev/rules.d/10-sdrcJoystickRules ]; then
+    echo ""
+    echo "SDRC Joystick udev Rules Not Fould."
+    echo -e "${format}Do you want to install joystick support files?${clearformat}"
+    if [ $test_mode == "False" ]; then
+      read -p 'y/n: ' cont
+      case $cont in  
+        y|Y) cont=True ;; 
+        n|N) cont=False ;; 
+        *) cont=False ;; 
+      esac
+    else
+      cont=True
+      echo "y"
+    fi
+
+    if [ $cont == "True" ]; then
+      echo -e "${cyan}${underline}Intalling joystick udev rules...${clearformat}"
+      sudo cp ./extras/etc/udev/rules.d/10-sdrcJoystick.rules /etc/udev/rules.d/
+      echo "Installed joystick udev rules to /etc/udev/rules.d/10-sdrcJoystickRules."
+    else
+      echo "Not installing joystick udev rules."
+    fi
+fi
+
+
+
 
 echo -e "${cyan}${underline}Running catkin_make:${clearformat}"
 echo "cd $CATKIN"
