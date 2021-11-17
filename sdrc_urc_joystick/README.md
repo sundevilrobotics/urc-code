@@ -1,4 +1,4 @@
-# Learning Joy
+# sdrc_urc_joystick
 
 This is a package of modified code from tutorials to interface with joystick controllers. It is in dire need of refactoring, etc.
 
