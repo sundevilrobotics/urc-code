@@ -1,0 +1,79 @@
+<!-- Launch File compiled by Brandon Rice -->
+<!-- Credit to Open Robotics (TurtleBot) and the many contributors of the ROS
+sdrc_urc_navigation Stack! -->
+
+<launch>
+  <!-- Arguments -->
+  <arg name="map_file" value="$(find sdrc_urc_navigation)/maps/house.yaml"/>
+  <arg name="open_rviz" default="true"/>
+  <arg name="move_forward_only" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="cmd_vel_topic" default="/cmd_vel" />
+  <arg name="odom_topic" default="odom" />
+
+  <!-- Launch Gazebo World -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find
+      turtlebot3_gazebo)/worlds/turtlebot3_house.world"/>
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="$(arg gui)"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+    <arg name="verbose" default="true"/>
+  </include>
+
+  <!-- Spawn Turtlebot URDF -->
+  <arg name="x" default="-7"/>
+  <arg name="y" default="-3.5"/>
+  <arg name="z" default="0"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="0"/>
+  <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger,
+    waffle, waffle_pi]"/>
+  <param name="robot_description" command="$(find xacro)/xacro $(find
+    turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param
+    robot_description -urdf -model turtlebot3 -x $(arg x) -y $(arg y) -z $(arg z)
+    -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
+
+  <!-- Launch Turtlebot3 ROS Packages -->
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_remote.launch">
+    <arg name="model" value="$(arg model)" />
+  </include>
+
+  <!-- Start Map server -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg
+    map_file)"/>
+
+  <!-- Start AMCL -->
+  <include file="$(find turtlebot3_navigation)/launch/amcl.launch">
+    <arg name="initial_pose_x" default="$(arg x)"/>
+    <arg name="initial_pose_y" default="$(arg y)"/>
+    <arg name="initial_pose_a" default="$(arg yaw)"/>
+  </include>
+
+  <!-- Start move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+    <param name="base_global_planner/use_dijkstra" value="true"/>
+    <rosparam file="$(find turtlebot3_navigation)/param/costmap_common_params_$(arg model).yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find turtlebot3_navigation)/param/costmap_common_params_$(arg model).yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find turtlebot3_navigation)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/param/move_base_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/param/dwa_local_planner_params_$(arg model).yaml" command="load" />
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg
+    move_forward_only)" />
+  </node>
+
+  <!-- Launch rviz -->
+  <group if="$(arg open_rviz)">
+    <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find
+    turtlebot3_navigation)/rviz/turtlebot3_navigation.rviz"/>
+  </group>
+
+</launch>
