@@ -67,7 +67,7 @@ jobs:
           catkin config -DCATKIN_ENABLE_TESTING=0
 
           # run script
-          "${GITHUB_WORKSPACE}/install.sh -t" -f
+          "${GITHUB_WORKSPACE}/install.sh" -t
 
       - name: catkin_make install.sh Packages
         run: |
