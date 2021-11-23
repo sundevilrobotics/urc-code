@@ -27,8 +27,12 @@ This folder contains the following ROS packages:
 - [sdrc_urc_navigation](sdrc_urc_navigation)
 - [sdrc_urc_pi](sdrc_urc_pi)
 - [sdrc_urc_zed2](sdrc_urc_zed2)
+- [*third_party_packages*](third_party_packages)\*\*
 
 \* (The SDRC URC code ROS metapackage)
+
+\*\* (third_party_packages is a folder full of ROS packages from other authors used by sdrc_urc, both forked and direct Git submodules.)
+
 ___
 
 ## Package: sdrc_urc_arm

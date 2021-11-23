@@ -1,3 +1,24 @@
 [submodule "third_party_packages/rplidar_ros"]
 	path = third_party_packages/rplidar_ros
 	url = https://github.com/Slamtec/rplidar_ros.git
+[submodule "third_party_packages/ar_track_alvar"]
+	path = third_party_packages/ar_track_alvar
+	url = https://github.com/machinekoder/ar_track_alvar.git
+[submodule "third_party_packages/joystick_drivers"]
+	path = third_party_packages/joystick_drivers
+	url = https://github.com/ros-drivers/joystick_drivers.git
+[submodule "third_party_packages/odrive_ros"]
+	path = third_party_packages/odrive_ros
+	url = https://github.com/neomanic/odrive_ros.git
+[submodule "third_party_packages/ros_canopen"]
+	path = third_party_packages/ros_canopen
+	url = https://github.com/ros-industrial/ros_canopen.git
+[submodule "third_party_packages/rosserial"]
+	path = third_party_packages/rosserial
+	url = https://github.com/ros-drivers/rosserial.git
+[submodule "third_party_packages/robot_activity"]
+	path = third_party_packages/robot_activity
+	url = https://github.com/snt-robotics/robot_activity.git
+[submodule "third_party_packages/zed-ros-interfaces"]
+	path = third_party_packages/zed-ros-interfaces
+	url = https://github.com/stereolabs/zed-ros-interfaces.git
