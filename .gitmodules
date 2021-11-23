@@ -22,3 +22,6 @@
 [submodule "third_party_packages/zed-ros-interfaces"]
 	path = third_party_packages/zed-ros-interfaces
 	url = https://github.com/stereolabs/zed-ros-interfaces.git
+[submodule "sdrc_urc_secret"]
+	path = sdrc_urc_secret
+	url = git@github.com:sundevilrobotics/sdrc_urc_secret.git

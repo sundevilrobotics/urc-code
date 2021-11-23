@@ -26,12 +26,15 @@ This folder contains the following ROS packages:
 - [sdrc_urc_mapping](sdrc_urc_mapping)
 - [sdrc_urc_navigation](sdrc_urc_navigation)
 - [sdrc_urc_pi](sdrc_urc_pi)
+- [*sdrc_urc_secret*](sdrc_urc_secret)\*\*
 - [sdrc_urc_zed2](sdrc_urc_zed2)
-- [*third_party_packages*](third_party_packages)\*\*
+- [*third_party_packages*](third_party_packages)\*\*\*
 
-\* (The SDRC URC code ROS metapackage)
+\* *(The SDRC URC code ROS metapackage)*
 
-\*\* (third_party_packages is a folder full of ROS packages from other authors used by sdrc_urc, both forked and direct Git submodules.)
+\*\* *(Only accessible by members of the SDRC GitHub Organization)*
+
+\*\*\* *(A folder full of ROS packages from other authors used by sdrc_urc, both forked and direct Git submodules.)*
 
 ___
 
@@ -91,6 +94,10 @@ Software used to autonomously navigate using the ROS Navigation Stack (NavStack)
 
 ## Package: sdrc_urc_pi
 Software that interfaces with the rover's Raspberry Pi microcontroller. *Note: currently empty, needs updating.*
+
+## Package: sdrc_urc_secret
+Secret package only accessible by members of the Sun Devil Robotics Club GitHub Organization. Contains models, code, and other sensitive information that give us
+a competitive advantage!
 
 ## Package: sdrc_urc_zed2
 Software that interfaces with the rover's ZED2 camera. *Note: currently empty, needs updating.*

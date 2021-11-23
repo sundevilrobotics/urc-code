@@ -1,22 +1,30 @@
 #!/bin/bash
 
-Help()
-{
-   # Display Help
-   echo "Add description of the script functions here."
-   echo
-   echo "Syntax: scriptTemplate [-g|h|v|V]"
-   echo "options:"
-   echo "g     Print the GPL license notification."
-   echo "h     Print this Help."
-   echo "v     Verbose mode."
-   echo "V     Print software version and exit."
-   echo
-}
-
 test_mode=False
 
-while getopts ":ht" option; do
+Version()
+{
+  echo "install.sh - Sun Devil Robotics Club urc-code Dependencies Installer"
+  echo "Version 1.0"
+  echo "Created by Brandon Rice"
+  echo "Copyright 2021"
+  echo
+}
+
+Help()
+{
+  # Display Help
+  Version
+  echo "Syntax: install.sh [-h|t|v|w]"
+  echo "Options:"
+  echo "h     Print this Help."
+  echo "t     Enable Test Mode (answer y to all questions)."
+  echo "v     Print the version information."
+  echo "w     Go to the SDRC urc-code website."
+  echo
+}
+
+while getopts ":htwv" option; do
    case $option in
       h) # display Help
         Help
@@ -24,6 +32,14 @@ while getopts ":ht" option; do
       t) # test mode for automated gtests
         test_mode=True
         echo "TEST MODE ENABLED";;
+      v)
+        Version
+        exit;;
+      w)
+        echo "Opening website: https://github.com/sundevilrobotics/urc-code.git"
+        echo
+        python3 -m webbrowser https://github.com/sundevilrobotics/urc-code.git
+        exit;;
       *)
         echo "Incorrect arguments passed!"
         echo ""
@@ -160,26 +176,26 @@ for d in */ ; do
 done
 echo ""
 
-echo -e "${cyan}${underline}Installing additional dependencies from source (that rosdep cannot handle)...${clearformat}"
-while IFS=, read -r name link
-do
-  wd=$(pwd)
-  cd ..
+# echo -e "${cyan}${underline}Installing additional dependencies from source (that rosdep cannot handle)...${clearformat}"
+# while IFS=, read -r name link
+# do
+#   wd=$(pwd)
+#   cd ..
 
-  if [ -d "./$name" ]; then
-    echo -e "${yellow}$name${clearformat} is installed. Checking if it needs to be updated..."
-    cd ./$name
-    git pull
-    cd $wd
-  else
-    echo -e "${yellow}$name${clearformat} is not installed. Installing $name:"
-    $link
-    cd $wd
-    echo "source,$name," >> packages_to_uninstall.csv
-  fi
+#   if [ -d "./$name" ]; then
+#     echo -e "${yellow}$name${clearformat} is installed. Checking if it needs to be updated..."
+#     cd ./$name
+#     git pull
+#     cd $wd
+#   else
+#     echo -e "${yellow}$name${clearformat} is not installed. Installing $name:"
+#     $link
+#     cd $wd
+#     echo "source,$name," >> packages_to_uninstall.csv
+#   fi
 
-done < packages.csv
-echo ""
+# done < packages.csv
+# echo ""
 
 echo -e "${cyan}${underline}Checking Gazebo version and updating if necessary...${clearformat}"
 gzversion=$(gazebo --version | head -n 1)
@@ -248,6 +264,33 @@ catkin_make
 
 echo ""
 echo "Successfully installed all dependencies!"
+
+
+if [ ! -f ./sdrc_urc_secret/README.md ]; then
+    echo ""
+    echo "SDRC URC Secret folder not initialized."
+    echo -e "${format}Do you want to initialize and update this folder? (Only members of the SDRC GitHub Organization will be able to access these files)${clearformat}"
+    if [ $test_mode == "False" ]; then
+      read -p 'y/n: ' cont
+      case $cont in  
+        y|Y) cont=True ;; 
+        n|N) cont=False ;; 
+        *) cont=False ;; 
+      esac
+    else
+      cont=True
+      echo "y"
+    fi
+
+    if [ $cont == "True" ]; then
+      echo -e "${cyan}${underline}Initializing and updating SDRC URC Secret folder...${clearformat}"
+      git submodule update --init ./sdrc_urc_secret
+      echo "Initialized and updated the files in ./sdrc_urc_secret/"
+    else
+      echo "Not initializing the SDRC URC Secret files."
+    fi
+fi
+
 read -n 1 -s -r -p "Press any key to continue"
 # clear
 echo -e "\e[?1049l"

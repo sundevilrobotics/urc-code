@@ -1,2 +1,0 @@
-ar_track_alvar, git clone https://github.com/machinekoder/ar_track_alvar.git -b noetic-devel,
-joystick_drivers, git clone https://github.com/ros-drivers/joystick_drivers.git,
