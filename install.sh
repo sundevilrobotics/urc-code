@@ -266,7 +266,7 @@ echo ""
 echo "Successfully installed all dependencies!"
 
 
-if [ ! -f ./sdrc_urc_secret/README.md ]; then
+if [ ! -f ./sdrc_urc_restricted/README.md ]; then
     echo ""
     echo "SDRC URC Secret folder not initialized."
     echo -e "${format}Do you want to initialize and update this folder? (Only members of the SDRC GitHub Organization will be able to access these files)${clearformat}"
