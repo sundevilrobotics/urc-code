@@ -73,6 +73,7 @@
   <exec_depend>turtlebot3_fake</exec_depend>
   <exec_depend>turtlebot3_bringup</exec_depend>
   <exec_depend>turtlebot3_navigation</exec_depend>
+  <exec_depend>rviz</exec_depend>
   
 
   <!-- The export tag contains other, unspecified, tags -->

@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
   turtlebot3_fake
   turtlebot3_bringup
   turtlebot3_navigation
+  rviz
 )
 
 ## System dependencies are found with CMake's conventions
