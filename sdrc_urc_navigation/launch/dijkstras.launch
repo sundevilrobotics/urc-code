@@ -1,10 +1,10 @@
 <!-- Launch File compiled by Brandon Rice -->
 <!-- Credit to Open Robotics (TurtleBot) and the many contributors of the ROS
-sdrc_urc_navigation Stack! -->
+Navigation Stack! -->
 
 <launch>
   <!-- Arguments -->
-  <arg name="map_file" value="$(find sdrc_urc_mapping)/maps/house.yaml"/>
+  <arg name="map_file" value="$(find navigation)/maps/house.yaml"/>
   <arg name="open_rviz" default="true"/>
   <arg name="move_forward_only" default="false"/>
   <arg name="gui" default="true"/>
