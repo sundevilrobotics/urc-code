@@ -73,6 +73,7 @@
   <exec_depend>sdrc_urc_gps</exec_depend>
   <exec_depend>sdrc_urc_lidar</exec_depend>
   <exec_depend>sdrc_urc_zed2</exec_depend>
+  <exec_depend>sdrc_urc_restricted</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
