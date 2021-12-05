@@ -5,6 +5,7 @@ name: Build ROS Noetic Workspace Using catkin_make
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the develop branch
+  # Potentially should be changed to a new Noetic-only develop branch
   push:
     branches: [develop]
   pull_request:
