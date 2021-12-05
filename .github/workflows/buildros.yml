@@ -1,4 +1,4 @@
-name: Build ROS Melodic Workspace Using catkin_make
+name: Build ROS Workspace Using catkin_make
 
 # Inspiration came from https://answers.ros.org/question/336103/github-actions-catkin-build-example/
 
@@ -45,42 +45,38 @@ jobs:
           sudo apt install curl
           curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
           sudo apt update
-          sudo apt install ros-melodic-desktop
-          sudo apt install ros-melodic-catkin python-catkin-tools ros-melodic-diagnostics ros-melodic-roslint
-          source /opt/ros/melodic/setup.bash
+          sudo apt install ros-$ROS_DISTRO-desktop
+          sudo apt install ros-$ROS_DISTRO-catkin python-catkin-tools ros-$ROS_DISTRO-diagnostics ros-$ROS_DISTRO-roslint python3-rosdep
+          source /opt/ros/$ROS_DISTRO/setup.bash
 
       - name: Make Catkin Workspace
         run: |
-          source /opt/ros/melodic/setup.bash
+          source /opt/ros/$ROS_DISTRO/setup.bash
           mkdir -p ~/catkin_ws/src
           cd ~/catkin_ws/
           catkin config -DCATKIN_ENABLE_TESTING=0
           catkin_make
           source devel/setup.bash
-
-      - name: Install ROS Packages from install.sh
-        run: |
-          source /opt/ros/melodic/setup.bash
-          # make file runnable, might not be necessary
-          chmod +x "${GITHUB_WORKSPACE}/install.sh"
           
-          catkin config -DCATKIN_ENABLE_TESTING=0
-
-          # run script
-          "${GITHUB_WORKSPACE}/install.sh" -t
-
-      - name: catkin_make install.sh Packages
+      - name: Init urc-code Repo in catkin_ws
         run: |
-          source /opt/ros/melodic/setup.bash
+          source /opt/ros/$ROS_DISTRO/setup.bash
+          ln -s $GITHUB_WORKSPACE ~/catkin_ws/src/urc-code
+
+      # Credit to https://answers.ros.org/question/336103/github-actions-catkin-build-example/
+      - name: Install ROS Packages with rosdep
+        run: | 
+          source /opt/ros/$ROS_DISTRO/setup.bash
+          sudo rosdep init
+          rosdep update
+          cd ~/catkin_ws
+          rosdep install --from-paths src --ignore-src -r -s  # do a dry-run first
+          rosdep install --from-paths src --ignore-src -r -y
+
+      - name: catkin_make sundevilrobotics/urc-code
+        run: |
+          source /opt/ros/$ROS_DISTRO/setup.bash
           cd ~/catkin_ws/
           catkin config -DCATKIN_ENABLE_TESTING=0
           catkin_make
           source devel/setup.bash
-
-      - name: catkin_make sundevilrobotics/urc-code
-        run: |
-          source /opt/ros/melodic/setup.bash
-          ln -s $GITHUB_WORKSPACE ~/catkin_ws/src/urc-code
-          cd ~/catkin_ws/
-          catkin config -DCATKIN_ENABLE_TESTING=0
-          catkin_make
