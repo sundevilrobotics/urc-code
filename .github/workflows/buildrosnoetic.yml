@@ -1,4 +1,4 @@
-name: Build ROS Workspace Using catkin_make
+name: Build ROS Noetic Workspace Using catkin_make
 
 # Inspiration came from https://answers.ros.org/question/336103/github-actions-catkin-build-example/
 
